@@ -77,6 +77,25 @@ TBD - separate or merged into prior?
 
 # Setup
 
-## Avatek Asistant (Pixlite Configuration)
+## Raspberry Pi Initial Setup
+
+1. Download the Raspberry Pi Imager to create the SD card with the Raspberry Pi OS.  The Raspberry Pi Imager can be downloaded from [here](https://www.raspberrypi.com/software/).
+2. Gather required supplies for installation; you'll need a USB mouse, USB keyboard, display, cables to hook up the display (the Pleasure Dairy Raspberry Pi comes with an attached display) if running the Raspberry Pi with a U.I. If running headless, these are not required.
+3. Run the Raspberry Pi Imager and select the right operating system for install
+    - For older (model 1/2) raspberry Pis, select a 32 bit operating system
+    - Newer versions can use a 64 bit
+4. Select the SD card to install the operating system on
+5. Click settings and set a hostname for the device (write this down), toggle enable SSH, and set a username and password for the device
+6. Set the WIFI SSID, name, password, and country for the device
+7. Write the image to the card
+8. Install the microSD card onto the raspberry pi and power on
+9. Follow directions [here](https://www.tomshardware.com/reviews/raspberry-pi-headless-setup-how-to,6028.html) to set up access over wifi, ethernet, or VNC
+
+References: [Setup guide for headless (no monitor)](https://www.tomshardware.com/reviews/raspberry-pi-headless-setup-how-to,6028.html) and [Setup guide for normal operation (with monitor)](https://www.raspberrypi.com/documentation/computers/getting-started.html)
+
+## Pixlite Configuration with Avatek Asistant 
 
 Download the Avatek Assistant SW for the MK1/2 models from [here](https://www.advateklights.com/downloads/advatek-assistant).
+
+
+
