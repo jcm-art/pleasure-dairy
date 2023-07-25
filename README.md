@@ -151,3 +151,13 @@ Use the login information in the .env file (procured directly from @jcm-art) to 
 ### Remote connection to Console (VNC)
 
 TODO - this is not working yet
+
+## Setting up the Raspberry Pi Webcam
+
+To use the webcam attached to the raspberry pi for remote development, install cheese by running the following command in terminal:
+```
+sudo apt-get install cheese
+
+```
+
+After the installation is complete, open cheese by entering "cheese" in terminal.
