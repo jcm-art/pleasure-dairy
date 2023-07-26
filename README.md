@@ -53,6 +53,7 @@ TBD - separate or merged into prior?
 
 - [Pixlite Manual](https://www.advateklights.com/downloads/user-manuals/pixlite-16-mk2)
 - [Pixlite Configuration Guide](https://www.advateklights.com/downloads/user-manuals/pixlite-configuration-guide)
+- [Supported Pixel protocols](https://www.advateklights.com/knowledge-base/pixel-protocols)
 
 ## Raspberry Pi 4 Model B Rev 1.2
 
@@ -66,6 +67,7 @@ TBD - separate or merged into prior?
 - [Overview of WS2813 Lights and Control](https://www.sdiplight.com/what-is-ws2813-led-and-how-to-use-ws2813/)
 - [UCS1903 Overview and Electrical Background](https://cdn.sparkfun.com/assets/6/d/6/c/3/UCS1903_IC-manul.pdf)
 - [UCS2903 Pixel Protocol Overview](https://www.advateklights.com/knowledge-base/ucs2903)
+    - RGBW version is [UCS2904](https://www.advateklights.com/knowledge-base/ucs2904)
 
 ## Power Supplies
 
@@ -119,9 +121,67 @@ To setup a VNC connection for a headless system, additional instructions are nee
 
 References: [Setup guide for headless (no monitor)](https://www.tomshardware.com/reviews/raspberry-pi-headless-setup-how-to,6028.html) and [Setup guide for normal operation (with monitor)](https://www.raspberrypi.com/documentation/computers/getting-started.html)
 
-## Pixlite Configuration with Avatek Asistant 
+## Pixlite 16 MK2
 
-Download the Avatek Assistant SW for the MK1/2 models from [here](https://www.advateklights.com/downloads/advatek-assistant). Avatek does not appear to offer a linux version of the Avatek Assistant 2 so you'll need to use an osx or windows computer. The Avatek Assistant 3 is available for linux but does not appear support the MK1/2 models (it's paired with MK3).
+## Setting Up the PixLite Board (initial configuration)
+
+1. Connect the PixLite to a 12V or 5V power supply (depending on the voltage of the lights that will need to be controlled)
+2. Connect the power supply to a wall outlet to power on the PixLite
+3. Connect an ethernet cable from the PixLite to a OSX device, Windows device, or network where it can be accessed by the host device (note: can't be a linux computer or the Raspberry Pi for the MK2) you're using to initially configure the PixLite
+4. Find the IP address for the device
+    - For OSX, this can be done using the "ifconfig" command in terminal or by going to system preferences -> network -> USB10/100 LAN and reading the IP address
+5. Ping the device to verify the connection is working
+    - For OSX, the command is "ping <ip address>" in terminal
+
+
+### Configuration with Avatek Asistant 
+
+1. Download the Avatek Assistant SW for the MK1/2 models from [here](https://www.advateklights.com/downloads/advatek-assistant)
+    - Avatek does not appear to offer a linux version of the Avatek Assistant 2 so you'll need to use an osx or windows computer
+    - The Avatek Assistant 3 is available for linux but does not appear support the MK1/2 models (it's paired with MK3).
+2. Open the Avatek Assistant and look for your PixLite device; if it's not showing up, try selecting a different adapter and hitting search
+3. Click on the pixlite device you want to configure (can refer to the PixLite configuration guide above for more details)
+    - On my host computer, I received a warning that the IP address settings on the deivce were not compatible with the host computer; hitting yes on this popup window gives IP address settings that can be used to connect to the device
+4. Update the IP settings on the host computer to enable compatibility with PixLite
+    - To modify these settings on a Mac:
+        - open System Preferences -> Network -> USB10/100 LAN -> Advanced -> TCP/IP
+        - Select manual for the configure IPv4 option and manually enter an ip address and subnet mask
+        - My settings for my USB ethernet adapter were IP address 169.254.142.130 and subnet mask 255.255.0.0 
+    - For background on what this is doing, learn about ip addresses / subnet masks [here](https://avinetworks.com/glossary/subnet-mask/) and PixLite requirements [here](https://www.advateklights.com/knowledge-base/advatek-assistant-v2-troubleshooting)
+5. Update the IP settings on the PixLite device to match the host computer adapter using the popup window in step 3
+    - If the PixLite is connected directly to a computer or network switch without a router, the static option must be used
+    - The PixLite subnet mask must match the subnet mask of the host computer adapter
+    - The IP address must be within the address range of the host computer adapter; in this example, my host adapter mask is 255.255.0.0; this means that the first two numbers of the IP address must match the host computer adapter IP address and the last two numbers can be anything from 0 to 255 (they can't match the host computer exactly)
+    - To match with this, I selected a PixLite IP address of 169.254.142.213
+    - Verify the connection by pinging the device again
+6. Refresh the network adapters in Advatek Assistant and select the correct network adapter; hit search to find the pixlite
+7. Select the pixlite and hit configure; this time, the pop up should open with additional settings for control, LEDs, test, and Misc
+8. First, update the firmware; the latest Mk2 firmware can be found [here](https://www.advateklights.com/downloads/firmware/pixlite-mk2)
+8. TODO - define configuration settings for PixLite, [current settings (7/25/23) linked in google drive](https://drive.google.com/drive/folders/1Z_ikBbwPMdnxjey6tf7L3JBrqQoH3cNj)
+9. Test the light connections using the testconfiguration tab
+
+### Connecting PixLite to Raspberry Pi
+
+1. Log onto the Raspberry Pi and find the IP address for the eth0 adapter using ipconfig; if an IP address is not assigned to eth0, it will need to be configured
+2. To configure a static IP address for Raspberry Pi eth0:
+    - Run "ip r | grep default" to retreive the router address and note the first IP (router IP adddress) - this is 192.168.0.1 in the example output below
+        ```
+        default via 192.168.86.1 dev wlan0 proto dhcp src 192.168.86.250 metric 303 
+        ```
+    - Run "sudo nano /etc/resolv.conf" and note the nameserver IP address (example output below)
+        ```
+        # Generated by resolvconf
+        domain lan
+        nameserver 192.168.86.1
+        ```
+    - Run "sudo nano /etc/dhcpcd.conf" in terminal and set the IP address of the eth0 router to match the PixLite config. To set a mask, a /n notation must be used; the calculator [here](https://mxtoolbox.com/subnetcalculator.aspx) can be used to convert between the two notations; for our example above, the subnet mask 255.255.0.0 can be represented by /16. My settings
+        ```
+        interface eth0
+        static ip_address=169.254.141.129/16
+        ```
+2. Connect the PixLite to the Raspberry Pi using an ethernet cable and power on
+3. Run ifconfig on the raspberry pi to confim the IP address
+4. Ping the PixLite to confirm the connection is working
 
 
 # Developing for Pleasure Dairy
@@ -152,7 +212,9 @@ Use the login information in the .env file (procured directly from @jcm-art) to 
 
 TODO - this is not working yet
 
-## Setting up the Raspberry Pi Webcam
+## Configure Raspberry Pi
+
+### Setting up the Raspberry Pi Webcam
 
 To use the webcam attached to the raspberry pi for remote development, install cheese by running the following command in terminal:
 ```
@@ -161,3 +223,12 @@ sudo apt-get install cheese
 ```
 
 After the installation is complete, open cheese by entering "cheese" in terminal.
+
+### Set the screen brightness
+
+First, install a text editor for terminal of your choice (for VIM, use "sudo apt-get vim"). Then edit the brightness file of the attached display (display name will be in the backlight file, for the RPi screen attached to pleasure-dairy-1 this is "10-0045") by running the following command in terminal:
+```
+sudo vim /sys/class/backlight/10-0045/brightness 
+```
+This will reduce nuisance and power for remote development without impacting the VNC settings.
+
