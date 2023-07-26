@@ -182,6 +182,11 @@ References: [Setup guide for headless (no monitor)](https://www.tomshardware.com
 2. Connect the PixLite to the Raspberry Pi using an ethernet cable and power on
 3. Run ifconfig on the raspberry pi to confim the IP address
 4. Ping the PixLite to confirm the connection is working
+    - Note: I had to use a USB ethernet adapter (same that I brought up the device with) to get this working
+
+TODO - add information on eth0 vs. adapter configuration
+TODO - fix need for separate USB ethernet adapter on Raspberry Pi
+TODO - fix settings in step 1 in this section
 
 
 # Developing for Pleasure Dairy
