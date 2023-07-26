@@ -1,0 +1,3 @@
+[submodule "bin/LXStudio-IDE"]
+	path = bin/LXStudio-IDE
+	url = https://github.com/heronarts/LXStudio-IDE.git
