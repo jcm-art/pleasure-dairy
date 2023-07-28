@@ -200,8 +200,41 @@ TODO - fix settings in step 1 in this section
 
 ## LX Studio
 
+### Setting up LX Studio Dependencies on Raspberry Pi
+
+To run LX Studio applications on Raspberry Pi, Java must first be installed. To install the Temurin 17 JDK used for LX studio, this can be done by executing:
+
+```
+sudo apt-get install temurin-17-jdk
+```
+
+Eclipse will also need to be installed to run the LX Studio IDE via the following steps:
+1. Install a browser using "sudo apt-get install chromium-browser"
+2. Go to the Eclipse download page and download the latest release
+3. Extract the installer using "tar xvzf eclipse-inst-jre-linux-aarch64.tar.gz"
+4. Run the installer using "./eclipse-inst"
+
 ### Configuring Raspberry Pi network settings for LX Studio
 TODO - https://github.com/heronarts/LXStudio/wiki/Raspberry-Pi
+
+
+### Installing LX Studio Libraries
+
+Navigate to the working directory for eclipse; for Pleasure Dairy development, this was put in the repo for Pleasure-Dairy at pleasure_dairy/bin and either add them as a submodule or clone the following repositories.
+
+1. To add as submodule:
+    - Note: When cloning the pleasure dairy repo on a new machine, to pull in these submodules use "git submodule update --init --recursive"
+```
+git submodule add https://github.com/heronarts/LXStudio-IDE.git bin/LXStudio-IDE
+git submodule add https://github.com/heronarts/P4LX.git bin/P4LX
+git submodule add https://github.com/heronarts/LX.git bin/LX
+```
+2. To clone:
+```
+
+```
+
+TODO - finish instructions https://github.com/heronarts/P4LX
 
 # Developing for Pleasure Dairy
 
