@@ -1,6 +1,6 @@
 {
   "version": "0.4.1",
-  "timestamp": 1690396061170,
+  "timestamp": 1690467881701,
   "model": {
     "id": 2,
     "class": "heronarts.lx.structure.LXStructure",
@@ -96,7 +96,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "169.254.142.213",
+          "host": "169.254.142.130",
           "port": 7890,
           "dmxChannel": 1,
           "artNetUniverse": 45,
@@ -104,7 +104,7 @@
           "opcOffset": 0,
           "ddpDataOffset": 0,
           "kinetPort": 1,
-          "numPoints": 160,
+          "numPoints": 170,
           "spacing": 1.5
         },
         "children": {}
@@ -245,7 +245,7 @@
           "scene-3": false,
           "scene-4": false,
           "scene-5": false,
-          "crossfader": 0.5,
+          "crossfader": 0.48305084742605686,
           "crossfaderBlendMode": 0,
           "focusedChannel": 0,
           "cueA": false,
@@ -291,7 +291,7 @@
               "viewEnabled": false,
               "viewSelector": "",
               "viewNormalization": 0,
-              "autoCycleEnabled": false,
+              "autoCycleEnabled": true,
               "autoCycleMode": 0,
               "autoCycleTimeSecs": 60.0,
               "transitionEnabled": false,
@@ -373,7 +373,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.6784115523526588
+                        "basis": 0.665276819906657
                       }
                     ],
                     "modulations": [],
@@ -405,7 +405,7 @@
             },
             "parameters": {
               "label": "Random",
-              "running": true,
+              "running": false,
               "trigger": false,
               "loop": true,
               "tempoSync": false,
@@ -422,7 +422,7 @@
               "triggerOut": false
             },
             "children": {},
-            "basis": 0.3830000000008487
+            "basis": 0.2206666666719233
           }
         ],
         "modulations": [],
@@ -617,8 +617,8 @@
         "camera": {
           "active": true,
           "radius": 345.5595397949219,
-          "theta": 6.478554315167762,
-          "phi": -1.2297015311196446,
+          "theta": 6.623056867393948,
+          "phi": -1.4137166738510132,
           "x": 115.18651580810547,
           "y": 5.0,
           "z": 30.864215850830078
@@ -627,8 +627,8 @@
           {
             "active": true,
             "radius": 345.5595397949219,
-            "theta": 6.478554315167762,
-            "phi": -1.2297015311196446,
+            "theta": 6.623056867393948,
+            "phi": -1.4137166738510132,
             "x": 115.18651580810547,
             "y": 5.0,
             "z": 30.864215850830078
