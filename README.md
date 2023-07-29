@@ -231,10 +231,24 @@ git submodule add https://github.com/heronarts/LX.git bin/LX
 ```
 2. To clone:
 ```
-
+git clone https://github.com/heronarts/LXStudio-IDE.git 
+git clone https://github.com/heronarts/LP4LX.git
+git clone https://github.com/heronarts/LX.git 
 ```
 
 TODO - finish instructions https://github.com/heronarts/P4LX
+
+## Network Configuration
+
+Install driver for USB adaptersas amazon basics (TBD details)
+https://www.asix.com.tw/en/product/USBEthernet/Super-Speed_USB_Ethernet/AX88179
+
+TODO - update with all IP addresses for devices
+
+
+## Light Configuration
+
+TODO - add information about light types
 
 # Developing for Pleasure Dairy
 
@@ -283,4 +297,6 @@ First, install a text editor for terminal of your choice (for VIM, use "sudo apt
 sudo vim /sys/class/backlight/10-0045/brightness 
 ```
 This will reduce nuisance and power for remote development without impacting the VNC settings.
+
+
 
