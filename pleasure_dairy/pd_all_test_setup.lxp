@@ -1,6 +1,6 @@
 {
   "version": "0.4.1",
-  "timestamp": 1690676140977,
+  "timestamp": 1690679933449,
   "model": {
     "id": 2,
     "class": "heronarts.lx.structure.LXStructure",
@@ -156,7 +156,7 @@
           "modulationColor": 0
         },
         "parameters": {
-          "label": "ws28x_03_pl1",
+          "label": "ucs19_03_p1",
           "x": 0.0,
           "y": 0.0,
           "z": 0.0,
@@ -196,7 +196,7 @@
           "modulationColor": 0
         },
         "parameters": {
-          "label": "ws28x_11_pl1",
+          "label": "ucs19_11_p1",
           "x": 0.0,
           "y": 0.0,
           "z": 0.0,
@@ -236,7 +236,7 @@
           "modulationColor": 0
         },
         "parameters": {
-          "label": "ws28x_14_pl1",
+          "label": "uc19_14_p1",
           "x": 0.0,
           "y": 0.0,
           "z": 0.0,
@@ -244,7 +244,7 @@
           "pitch": 0.0,
           "roll": 0.0,
           "scale": 1.0,
-          "selected": true,
+          "selected": false,
           "deactivate": false,
           "enabled": true,
           "brightness": 1.0,
@@ -265,6 +265,126 @@
           "ddpDataOffset": 0,
           "kinetPort": 1,
           "numPoints": 10,
+          "spacing": 10.0
+        },
+        "children": {}
+      },
+      {
+        "id": 1335,
+        "class": "heronarts.lx.structure.StripFixture",
+        "internal": {
+          "modulationColor": 0
+        },
+        "parameters": {
+          "label": "ucs29_4_p3",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "yaw": 0.0,
+          "pitch": 0.0,
+          "roll": 0.0,
+          "scale": 1.0,
+          "selected": false,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1.0,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "tags": "strip",
+          "protocol": 2,
+          "byteOrder": 3,
+          "transport": 0,
+          "reverse": false,
+          "host": "192.168.0.40",
+          "port": 7890,
+          "dmxChannel": 1,
+          "artNetUniverse": 7,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1,
+          "numPoints": 88,
+          "spacing": 10.0
+        },
+        "children": {}
+      },
+      {
+        "id": 1342,
+        "class": "heronarts.lx.structure.StripFixture",
+        "internal": {
+          "modulationColor": 0
+        },
+        "parameters": {
+          "label": "ucs29_14_p3",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "yaw": 0.0,
+          "pitch": 0.0,
+          "roll": 0.0,
+          "scale": 1.0,
+          "selected": false,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1.0,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "tags": "strip",
+          "protocol": 2,
+          "byteOrder": 3,
+          "transport": 0,
+          "reverse": false,
+          "host": "192.168.0.40",
+          "port": 7890,
+          "dmxChannel": 1,
+          "artNetUniverse": 27,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1,
+          "numPoints": 88,
+          "spacing": 10.0
+        },
+        "children": {}
+      },
+      {
+        "id": 1349,
+        "class": "heronarts.lx.structure.StripFixture",
+        "internal": {
+          "modulationColor": 0
+        },
+        "parameters": {
+          "label": "ucs19_9_pd3",
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "yaw": 0.0,
+          "pitch": 0.0,
+          "roll": 0.0,
+          "scale": 1.0,
+          "selected": true,
+          "deactivate": false,
+          "enabled": true,
+          "brightness": 1.0,
+          "identify": false,
+          "mute": false,
+          "solo": false,
+          "tags": "strip",
+          "protocol": 2,
+          "byteOrder": 3,
+          "transport": 0,
+          "reverse": false,
+          "host": "192.168.0.22",
+          "port": 7890,
+          "dmxChannel": 1,
+          "artNetUniverse": 9,
+          "opcChannel": 0,
+          "opcOffset": 0,
+          "ddpDataOffset": 0,
+          "kinetPort": 1,
+          "numPoints": 64,
           "spacing": 10.0
         },
         "children": {}
@@ -463,7 +583,7 @@
             "children": {},
             "effects": [],
             "clips": [],
-            "patternIndex": 6,
+            "patternIndex": 3,
             "patterns": [
               {
                 "id": 266,
@@ -520,7 +640,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.7309068654836363
+                        "basis": 0.6303863293115209
                       }
                     ],
                     "modulations": [
