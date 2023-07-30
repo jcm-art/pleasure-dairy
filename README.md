@@ -48,7 +48,7 @@ TBD - separate or merged into prior?
 ## Pleasure Comfort Subsystem
 
 - 16x 30mm x 9ft LED meteor tubes (older, unsealed)
-    - LED Rope Lights - WS2813 - 30LED/m
+    - LED Rope Lights - WS2811 (or WS2813 / other) - 30LED/m
 - 1 x Raspberrry Pi 4 Model B Rev 1.2
 - 1 x Pixlite 16 MK2 
 - 5V Power Supply
