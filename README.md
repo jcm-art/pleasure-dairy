@@ -5,11 +5,11 @@ Pleasure Dairy Lighting
 
 # Pleasure Dairy Lighting System Overview
 
-## Primary Control Subsystem
-
-TBD - separate or merged into prior?
+The pleasure dairy lighting system consists of three areas, each with their own raspberry Pi, power source, and pixlite. Each lighting zone will be controlled separately and there will not be any data transfer between the three systems.
 
 ## Bar and Frontage Subsystem
+
+![Pleasure Bar and Frontage Subsystem Diagram](docs/resources/pleasure_bar_frontage_system_diagram.png)
 
 - 16x 30mm x 9ft LED meteor tubes (newer, sealed)
     - 30mm x 9ft LED meteor tubes
@@ -25,6 +25,9 @@ TBD - separate or merged into prior?
 
 
 ## Pleasure Justice Subsystem
+
+![Pleasure Justice Subsystem Diagram](docs/resources/pleasure_justice_system_diagram.png)
+
 
 - ~8x 30mm x 9ft LED meteor tubes (newer, sealed)
     - 30mm x 9ft LED meteor tubes
@@ -46,6 +49,8 @@ TBD - separate or merged into prior?
 - 5V Raspberry Pi Power Supply
 
 ## Pleasure Comfort Subsystem
+
+![Pleasure Comfort Subsystem Diagram](docs/resources/pleasure_comfort_system_diagram.png)
 
 - 16x 30mm x 9ft LED meteor tubes (older, unsealed)
     - LED Rope Lights - WS2811 (or WS2813 / other) - 30LED/m
@@ -152,51 +157,42 @@ References: [Setup guide for headless (no monitor)](https://www.tomshardware.com
 2. Open the Avatek Assistant and look for your PixLite device; if it's not showing up, try selecting a different adapter and hitting search
 3. Click on the pixlite device you want to configure (can refer to the PixLite configuration guide above for more details)
     - On my host computer, I received a warning that the IP address settings on the deivce were not compatible with the host computer; hitting yes on this popup window gives IP address settings that can be used to connect to the device
+
+#### IP address settings / Network configuration steps
+
+Note: the IP address settings for the host computer / network adapters / raspberry Pis are important to get right.  If the IP address settings are not compatible, the PixLite device will not be able to be found by the Raspberry Pi, even if it can be controlled by the Advatek Assistant. This [file](https://docs.google.com/spreadsheets/d/1xNqIdJ2WjTZfyuVhxgLQYUdHf0_oKs64MjlumyWdJEw/edit?usp=sharing) contains a description of the network adapter settings and pixlite IP address settings by device.  The following steps can be used to set up the network adapter settings on a host computer and the PixLite device.
+
 4. Update the IP settings on the host computer to enable compatibility with PixLite
     - To modify these settings on a Mac:
         - open System Preferences -> Network -> USB10/100 LAN -> Advanced -> TCP/IP
         - Select manual for the configure IPv4 option and manually enter an ip address and subnet mask
-        - My settings for my USB ethernet adapter were IP address 169.254.142.130 and subnet mask 255.255.0.0 
+        - My settings for the first USB ethernet adapter were:
+            - Ip address: 192.168.0.20
+            - Subnet mask: 255.255.255.0
     - For background on what this is doing, learn about ip addresses / subnet masks [here](https://avinetworks.com/glossary/subnet-mask/) and PixLite requirements [here](https://www.advateklights.com/knowledge-base/advatek-assistant-v2-troubleshooting)
 5. Update the IP settings on the PixLite device to match the host computer adapter using the popup window in step 3
     - If the PixLite is connected directly to a computer or network switch without a router, the static option must be used
     - The PixLite subnet mask must match the subnet mask of the host computer adapter
     - The IP address must be within the address range of the host computer adapter; in this example, my host adapter mask is 255.255.0.0; this means that the first two numbers of the IP address must match the host computer adapter IP address and the last two numbers can be anything from 0 to 255 (they can't match the host computer exactly)
-    - To match with this, I selected a PixLite IP address of 169.254.142.213
+    - To match with this, I selected a PixLite IP address of:
+        - IP Address: 192.168.0.40
+        - Mask: 255.255.255.0
     - Verify the connection by pinging the device again
 6. Refresh the network adapters in Advatek Assistant and select the correct network adapter; hit search to find the pixlite
 7. Select the pixlite and hit configure; this time, the pop up should open with additional settings for control, LEDs, test, and Misc
 8. First, update the firmware; the latest Mk2 firmware can be found [here](https://www.advateklights.com/downloads/firmware/pixlite-mk2)
-8. TODO - define configuration settings for PixLite, [current settings (7/25/23) linked in google drive](https://drive.google.com/drive/folders/1Z_ikBbwPMdnxjey6tf7L3JBrqQoH3cNj)
+8. Set up the pixlite with the right settings - all three pixlites for each subsystem have been configured with these settings:
+    - [Pixlite Settings](https://docs.google.com/spreadsheets/d/1xNqIdJ2WjTZfyuVhxgLQYUdHf0_oKs64MjlumyWdJEw/edit#gid=0)
+    - If any issues are found with these and changes are required, they will need to be reconfigured with the Advatek Assistant tool on a windows or osx computer; if this is done, please update the settings in that document
 9. Test the light connections using the testconfiguration tab
 
 ### Connecting PixLite to Raspberry Pi
 
 1. Log onto the Raspberry Pi and find the IP address for the eth0 adapter using ipconfig; if an IP address is not assigned to eth0, it will need to be configured
-2. To configure a static IP address for Raspberry Pi eth0:
-    - Run "ip r | grep default" to retreive the router address and note the first IP (router IP adddress) - this is 192.168.0.1 in the example output below
-        ```
-        default via 192.168.86.1 dev wlan0 proto dhcp src 192.168.86.250 metric 303 
-        ```
-    - Run "sudo nano /etc/resolv.conf" and note the nameserver IP address (example output below)
-        ```
-        # Generated by resolvconf
-        domain lan
-        nameserver 192.168.86.1
-        ```
-    - Run "sudo nano /etc/dhcpcd.conf" in terminal and set the IP address of the eth0 router to match the PixLite config. To set a mask, a /n notation must be used; the calculator [here](https://mxtoolbox.com/subnetcalculator.aspx) can be used to convert between the two notations; for our example above, the subnet mask 255.255.0.0 can be represented by /16. My settings
-        ```
-        interface eth0
-        static ip_address=169.254.141.129/16
-        ```
 2. Connect the PixLite to the Raspberry Pi using an ethernet cable and power on
+    - If a usb network adapter is configured with a static IP address in the above steps on another computer, it can be transfered to the raspberry Pi and then used to connect to the PixLite without changing Raspberry Pi network settings
 3. Run ifconfig on the raspberry pi to confim the IP address
 4. Ping the PixLite to confirm the connection is working
-    - Note: I had to use a USB ethernet adapter (same that I brought up the device with) to get this working
-
-TODO - add information on eth0 vs. adapter configuration
-TODO - fix need for separate USB ethernet adapter on Raspberry Pi
-TODO - fix settings in step 1 in this section
 
 ## LX Studio
 
@@ -225,30 +221,44 @@ Navigate to the working directory for eclipse; for Pleasure Dairy development, t
 1. To add as submodule:
     - Note: When cloning the pleasure dairy repo on a new machine, to pull in these submodules use "git submodule update --init --recursive"
 ```
-git submodule add https://github.com/heronarts/LXStudio-IDE.git bin/LXStudio-IDE
 git submodule add https://github.com/heronarts/P4LX.git bin/P4LX
 git submodule add https://github.com/heronarts/LX.git bin/LX
 ```
 2. To clone:
 ```
-git clone https://github.com/heronarts/LXStudio-IDE.git 
 git clone https://github.com/heronarts/LP4LX.git
 git clone https://github.com/heronarts/LX.git 
 ```
 
-TODO - finish instructions https://github.com/heronarts/P4LX
+Note: LXStudio-IDE must be intalled separately on each platform. It is configured in a platform specific way upon opening and running the code and cannot be synced via the git repo. To install, follow the instructions above or [here](https://github.com/heronarts/LXStudio-IDE.git)
+
 
 ## Network Configuration
 
-Install driver for USB adaptersas amazon basics (TBD details)
-https://www.asix.com.tw/en/product/USBEthernet/Super-Speed_USB_Ethernet/AX88179
+To use the newer Amazon USB drivers, install driver for the USB adapter [here](https://www.asix.com.tw/en/product/USBEthernet/Super-Speed_USB_Ethernet/AX88179)
 
-TODO - update with all IP addresses for devices
+The network configuration instructions are included above and in this [document](https://docs.google.com/spreadsheets/d/1xNqIdJ2WjTZfyuVhxgLQYUdHf0_oKs64MjlumyWdJEw/edit#gid=0).
 
 
 ## Light Configuration
 
-TODO - add information about light types
+The pleasure dairy lighting systems contain three separate light types; the file below has 1-2 of each light, broken out by subsystem, configured to match the pixlite control settings.
+
+    pleasure_dairy/pd_all_test_setup.lxp
+
+This can be used as an example for new LX Studio designs. Additionally, the following files are the final intent templates for the LX Studio lights. These files should be properly set up to control the entiriety of the light system for each subsystem. They currently only contain a simple color cycle function but they can be added to and modified as needed to create other lighting effects.
+
+1. TODO - create Pleasure Justice template
+2. pleasure_dairy/pdpl2_pleasure_comfort_LED_layout.lxp
+3. TODO - create Bar and Frotage template
+
+If additional files are needed, make a copy of these - they contain the right network protocol, IP address, channel numbers, lengths, positions, and other settings to match the pixlite configuration and pleasure dairy system.
+
+## Deployment in the final setup
+
+TODO - determine how to deploy the LX Studio applications on the Raspberry Pi on load in a headless configuration, without manual intervention
+
+TODO - determine how to integrate buttons and other features into the system
 
 # Developing for Pleasure Dairy
 
@@ -256,7 +266,7 @@ TODO - add information about light types
 
 ### Local connection (ssh)
 
-Use the login information in the .env file (procured directly from @jcm-art) to connect to the Raspberry Pi over SSH.
+Use the login information in the .env file (procured directly from @jcm-art) to connect to the Raspberry Pi over SSH. This can be done by plugging into the network adapter directly or connecting to the same unmanaged ethernet switch as the Raspberry Pi and requires being physically present.
 
 ### Local connection to GUI (VNC)
 
@@ -276,7 +286,7 @@ Use the login information in the .env file (procured directly from @jcm-art) to 
 
 ### Remote connection to Console (VNC)
 
-TODO - add instructions on remote connectionj
+TODO - add instructions on remote connection via console only
 
 ## Configure Raspberry Pi
 
