@@ -1,6 +1,3 @@
-[submodule "bin/LXStudio-IDE"]
-	path = bin/LXStudio-IDE
-	url = https://github.com/heronarts/LXStudio-IDE.git
 [submodule "bin/P4LX"]
 	path = bin/P4LX
 	url = https://github.com/heronarts/P4LX.git
