@@ -1,6 +1,6 @@
 {
   "version": "0.4.1",
-  "timestamp": 1691555181024,
+  "timestamp": 1691588172941,
   "model": {
     "id": 2,
     "class": "heronarts.lx.structure.LXStructure",
@@ -1432,7 +1432,7 @@
             "children": {},
             "effects": [],
             "clips": [],
-            "patternIndex": 0,
+            "patternIndex": 1,
             "patterns": [
               {
                 "id": 4120,
@@ -1535,7 +1535,7 @@
                           "exp": 2.2351741790771484E-8
                         },
                         "children": {},
-                        "basis": 0.397670753096386
+                        "basis": 0.9460520101777501
                       }
                     ],
                     "modulations": [
