@@ -2,6 +2,7 @@
 tmp/*
 .env
 .DS_Store
+pdenv
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
