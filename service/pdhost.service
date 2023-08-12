@@ -1,0 +1,13 @@
+[Unit]
+Description=Pleasure Dairy service
+After=network.target
+[Service]
+ExecStart=/home/cow/git/pleasure-dairy/service/startupLoop.sh
+WorkingDirectory=/home/cow/git/pleasure-dairy
+StandardOutput=inherit
+StandardInput=inherit
+Restart=always
+User=cow
+
+[Install]
+WantedBy=multi-user.target
