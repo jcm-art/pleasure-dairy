@@ -12,16 +12,11 @@ from scipy.fft import fft
 
 class SoundAnalysisResults:
     
-    def __init__(self, sound_file_path, num_top_frequencies=3, freq_peak_threshold_fraction=0.01) -> None:
+    def __init__(self, sound_file_path) -> None:
         # Store file path and name
         self.sound_file_path = sound_file_path
         temp_name = pathlib.Path(self.sound_file_path).name.split(".")
         self.file_name = temp_name[0]
-
-        # Define top_n frequency value
-        self.top_freq_n = num_top_frequencies
-        self.freq_peak_threshold_fraction = freq_peak_threshold_fraction
-        self.mask_size = None
 
         # Create dictionary for storing sound analysis results
         self.sound_analysis_dict = {
@@ -33,6 +28,7 @@ class SoundAnalysisResults:
             'num_frames': None,
             'top_frequencies': {},
             'top_frequencies_amplitudes': {},
+            'num_top_frequencies': None
         }
 
         # Store wave value for audio
@@ -48,14 +44,17 @@ class SoundAnalysisResults:
     def set_num_channels(self, num_channels):
         self.sound_analysis_dict['num_channels'] = num_channels
 
+        # Store top frequency results for all channels combined
+        self.sound_analysis_dict['top_frequencies'][-1]=[]
+        self.sound_analysis_dict['top_frequencies_amplitudes'][-1]=[]
+
+
         for i in range(1,num_channels+1):
             self.sound_analysis_dict['top_frequencies'][i]=[]
             self.sound_analysis_dict['top_frequencies_amplitudes'][i]=[]
 
     def set_num_frames(self, num_frames):
         self.sound_analysis_dict['num_frames'] = num_frames
-        self.mask_size = int(self.freq_peak_threshold_fraction * num_frames)
-
 
     def set_sampling_rate(self, fs):
         self.sound_analysis_dict['sample_rate'] = fs
@@ -73,30 +72,25 @@ class SoundAnalysisResults:
         self.fft_results.append(fft_result)
         self.fft_frequencies.append(fft_frequency)
 
-        channel_num = len(self.fft_results)
-
-        # TODO - move to analyzer, use this for storage only
-        for i in range(0, self.top_freq_n):
-            # Get top n frequency
-            max_fft_index = np.argmax(fft_result)
-            print(f"{i} Max FFT index: {max_fft_index} vs. num_frames = {len(fft_result)}")
-            self.sound_analysis_dict['top_frequencies'][channel_num].append(fft_frequency[max_fft_index])
-            self.sound_analysis_dict['top_frequencies_amplitudes'][channel_num].append(fft_result[max_fft_index])
-
-            # Remove top n frequency from list
-            mask = np.ones(len(fft_result), dtype=bool)
-            mask_start = max_fft_index - self.mask_size if max_fft_index - self.mask_size >0 else 0
-            mask_end = max_fft_index + self.mask_size if max_fft_index + self.mask_size < len(fft_result) else len(fft_result)
-            mask[mask_start:mask_end] = False
-            fft_result = fft_result[mask]
-            fft_frequency = fft_frequency[mask]
-
+    def set_max_frequency(self, top_n_freqencies, top_n_amplitude, channel_num=None):
+        if channel_num is None:
+            self.sound_analysis_dict['top_frequencies'][-1] = top_n_freqencies
+            self.sound_analysis_dict['top_frequencies_amplitudes'][-1] = top_n_amplitude
+        else:
+            self.sound_analysis_dict['top_frequencies'][channel_num] = top_n_freqencies
+            self.sound_analysis_dict['top_frequencies_amplitudes'][channel_num] = top_n_amplitude
+    
+    def set_num_top_frequencies(self, top_freq_num):
+        self.sound_analysis_dict["num_top_frequencies"] = top_freq_num
 
     def get_fft_result(self, index):
         return self.fft_results[index], self.fft_frequencies[index]
 
-    def get_top_n_frequencies(self, channel_num):
+    def get_top_n_frequencies_by_channel(self, channel_num):
         return self.sound_analysis_dict['top_frequencies'][channel_num], self.sound_analysis_dict['top_frequencies_amplitudes'][channel_num]
+
+    def get_top_n_frequencies_for_all_channels(self):
+        return self.sound_analysis_dict['top_frequencies'][-1], self.sound_analysis_dict['top_frequencies_amplitudes'][-1]
 
 
 class PleasureComfortSoundAnalyzer:
@@ -132,6 +126,7 @@ class PleasureComfortSoundAnalyzer:
             # Get audio analysis parameters
             self._analyze_sounds(audio_analysis, fs, wave)
             self._generate_and_store_fft(audio_analysis, fs, wave)
+            self._extract_max_frequencies(audio_analysis)
 
             # Add audio analysis results to list
             self.sound_file_analysis_results.append(audio_analysis)
@@ -170,6 +165,60 @@ class PleasureComfortSoundAnalyzer:
             half_size = int(np.floor(num_frames/2))
             audio_analysis.append_fft_result(fftresult[:half_size], freqs[:half_size])
     
+    def _extract_max_frequencies(self, audio_analysis, top_freq_n = 3, freq_peak_threshold_fraction=0.01):
+
+        # Define parameters for max frequnecies
+        # Define top_n frequency value
+        self.top_freq_n = top_freq_n
+
+
+        overall_top_n_freq = np.zeros(self.top_freq_n)
+        overall_top_n_amplitudes = np.zeros(self.top_freq_n)
+
+        for channel_num in range(0, audio_analysis.sound_analysis_dict['num_channels']):
+            fft_result, fft_frequency = audio_analysis.get_fft_result(channel_num)
+
+            # Set mask size for removing frequency peaks
+            mask_size = int(freq_peak_threshold_fraction * len(fft_result))
+
+            # Get arrays to hold freq and amplitude
+            top_n_freq = []
+            top_n_amplitude = []
+
+            for i in range(0, self.top_freq_n):
+                # Get top n frequency
+                max_fft_index = np.argmax(fft_result)
+                print(f"{i} Max FFT index: {max_fft_index} vs. num_frames: {len(fft_result)}")
+                
+                # Get max values
+                freq = fft_frequency[max_fft_index]
+                amplitude = fft_result[max_fft_index]
+
+                top_n_freq.append(freq)
+                top_n_amplitude.append(amplitude)
+
+                # Remove top n frequency from list
+                mask = np.ones(len(fft_result), dtype=bool)
+                mask_start = max_fft_index - mask_size if max_fft_index - mask_size >0 else 0
+                mask_end = max_fft_index + mask_size if max_fft_index + mask_size < len(fft_result) else len(fft_result)
+                print(f"mask_start: {mask_start}, mask_end: {mask_end}")
+                mask[mask_start:mask_end] = False
+                fft_result = fft_result[mask]
+                fft_frequency = fft_frequency[mask]
+
+                # Check for global maximums for frequency
+                counter = 0
+                while counter < top_freq_n:
+                    if amplitude > overall_top_n_amplitudes[counter]:  
+                        overall_top_n_amplitudes[counter] = amplitude
+                        overall_top_n_freq[counter] = freq
+                        counter+=top_freq_n
+                    else:
+                        counter+=1
+
+            audio_analysis.set_max_frequency(top_n_freq, top_n_amplitude, channel_num+1)
+        audio_analysis.set_max_frequency(overall_top_n_freq.tolist(), overall_top_n_amplitudes.tolist())
+
     def create_sound_plots(self):
         print("Creating sound and frequnecy plots...")
 
@@ -179,7 +228,7 @@ class PleasureComfortSoundAnalyzer:
 
         # Set colors
         plot_colors = ['b', 'r']
-        top_n_colors = ['k','g']
+        top_n_color = 'k'
 
         # Create and save plots
         for sound_object in self.sound_file_analysis_results:
@@ -191,24 +240,31 @@ class PleasureComfortSoundAnalyzer:
             frames = np.arange(num_frames)   # x-axis
             fs = sound_object.sound_analysis_dict['sample_rate']
             num_channels = sound_object.sound_analysis_dict['num_channels']
+            amplitude_threshold = 5
+
 
             # Create plot
             fig, (axs_wav, axs_fourier) = plt.subplots(1,2, figsize=(12, 4))
 
             for i in range(0, num_channels):
+                # Plot the wav files
                 axs_wav.plot(frames, sound_data[:,i], label=f"Channel {i+1}", color=plot_colors[i])
                 axs_wav.set_xticks(np.arange(0, num_frames, num_frames/500000*fs), np.arange(0, num_frames/fs, num_frames/500000).astype("float16"))
 
+                # Plot FFTs (remove amplitude values below a threshold)
                 fftresult, freqs = sound_object.get_fft_result(i)
+                mask = np.where(fftresult > amplitude_threshold, True, False)
+                fftresult = fftresult[mask]
+                freqs = freqs[mask]
+                
                 axs_fourier.plot(freqs, fftresult, label=f"Channel {i+1}",color=plot_colors[i])
 
-                # Label top points
-                # TODO - combine channel frequencies
-                if i==0:
-                    top_n_freq, top_n_amplitudes = sound_object.get_top_n_frequencies(i+1)
-                    axs_fourier.scatter(top_n_freq,top_n_amplitudes,marker="x", label=f"Top {sound_object.top_freq_n} frequency (channel {i+1})",color=top_n_colors[i])
-                    for i in range(len(top_n_freq)):
-                        axs_fourier.annotate(f"f={round(top_n_freq[i],1)}", (top_n_freq[i], top_n_amplitudes[i]))
+            # Label top points
+            top_n_freq, top_n_amplitudes = sound_object.get_top_n_frequencies_for_all_channels()
+            axs_fourier.scatter(top_n_freq,top_n_amplitudes,marker="x", label=f"Top {self.top_freq_n} freq)",color=top_n_color)
+            for i in range(len(top_n_freq)):
+                #print(f"top n freq[i] {top_n_freq[i]} and full {top_n_freq}")
+                axs_fourier.annotate(f"f={round(top_n_freq[i],1)}", (top_n_freq[i], top_n_amplitudes[i]))
 
 
             # Label graphs
@@ -217,7 +273,7 @@ class PleasureComfortSoundAnalyzer:
             axs_wav.set_ylabel("Amplitude of sound wave")   
             axs_wav.legend(loc="lower right")
 
-            axs_fourier.set_title(f"FFT for {sound_object.file_name}")
+            axs_fourier.set_title(f"FFT for {sound_object.file_name} (all channels)")
             axs_fourier.set_xlabel("Frequency")          
             axs_fourier.set_ylabel("Intensity of Frequency Response") 
             axs_fourier.legend(loc="best")  
@@ -229,7 +285,7 @@ class PleasureComfortSoundAnalyzer:
 
         print("Plots completed...")
 
-    def _save_sound_analysis_result(self) -> None:
+    def save_sound_analysis_result(self) -> None:
         print("Saving output...")
         output_json = self._build_full_dict()
 
@@ -260,4 +316,5 @@ if __name__ == '__main__':
     pcsa.get_sound_file_paths()
     pcsa.analyze_sound_files()
     pcsa.create_sound_plots()
+    pcsa.save_sound_analysis_result()
     # pcsa.print_audio_analysis_results()
