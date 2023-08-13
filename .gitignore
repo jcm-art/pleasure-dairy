@@ -3,6 +3,7 @@ tmp/*
 .env
 .DS_Store
 pdenv
+.lxpreferences
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
