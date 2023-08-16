@@ -9,11 +9,11 @@
       "parameters": {
         "label": "ws28x_1_pd2",
         "x": 0.0,
-        "y": 0.0,
+        "y": 2700.0,
         "z": 0.0,
         "yaw": 0.0,
         "pitch": 0.0,
-        "roll": 90.0,
+        "roll": 270.0,
         "scale": 1.0,
         "selected": false,
         "deactivate": false,
@@ -35,7 +35,7 @@
         "opcOffset": 0,
         "ddpDataOffset": 0,
         "kinetPort": 1,
-        "numPoints": 64,
+        "numPoints": 67,
         "spacing": 39.0
       },
       "children": {}
@@ -49,11 +49,11 @@
       "parameters": {
         "label": "ws28x_2_pd2",
         "x": 60.0,
-        "y": 0.0,
+        "y": 2700.0,
         "z": -15.0,
         "yaw": 0.0,
         "pitch": 0.0,
-        "roll": 90.0,
+        "roll": 270.0,
         "scale": 1.0,
         "selected": false,
         "deactivate": false,
@@ -75,7 +75,7 @@
         "opcOffset": 0,
         "ddpDataOffset": 0,
         "kinetPort": 1,
-        "numPoints": 64,
+        "numPoints": 67,
         "spacing": 39.0
       },
       "children": {}
@@ -89,11 +89,11 @@
       "parameters": {
         "label": "ws28x_3_pd2",
         "x": 60.0,
-        "y": 0.0,
+        "y": 2700.0,
         "z": 45.0,
         "yaw": 0.0,
         "pitch": 0.0,
-        "roll": 90.0,
+        "roll": 270.0,
         "scale": 1.0,
         "selected": false,
         "deactivate": false,
@@ -115,7 +115,7 @@
         "opcOffset": 0,
         "ddpDataOffset": 0,
         "kinetPort": 1,
-        "numPoints": 64,
+        "numPoints": 67,
         "spacing": 39.0
       },
       "children": {}
@@ -129,11 +129,11 @@
       "parameters": {
         "label": "ws28x_4_pd2",
         "x": -60.0,
-        "y": 0.0,
+        "y": 2700.0,
         "z": 0.0,
         "yaw": 0.0,
         "pitch": 0.0,
-        "roll": 90.0,
+        "roll": 270.0,
         "scale": 1.0,
         "selected": false,
         "deactivate": false,
@@ -155,7 +155,7 @@
         "opcOffset": 0,
         "ddpDataOffset": 0,
         "kinetPort": 1,
-        "numPoints": 64,
+        "numPoints": 67,
         "spacing": 39.0
       },
       "children": {}
@@ -169,11 +169,11 @@
       "parameters": {
         "label": "ws28x_5_pd2",
         "x": -30.0,
-        "y": 0.0,
+        "y": 2700.0,
         "z": 55.0,
         "yaw": 0.0,
         "pitch": 0.0,
-        "roll": 90.0,
+        "roll": 270.0,
         "scale": 1.0,
         "selected": false,
         "deactivate": false,
@@ -195,7 +195,7 @@
         "opcOffset": 0,
         "ddpDataOffset": 0,
         "kinetPort": 1,
-        "numPoints": 64,
+        "numPoints": 67,
         "spacing": 39.0
       },
       "children": {}
@@ -209,11 +209,11 @@
       "parameters": {
         "label": "ws28x_6_pd2",
         "x": 0.0,
-        "y": 0.0,
+        "y": 2700.0,
         "z": 75.0,
         "yaw": 0.0,
         "pitch": 0.0,
-        "roll": 90.0,
+        "roll": 270.0,
         "scale": 1.0,
         "selected": false,
         "deactivate": false,
@@ -235,7 +235,7 @@
         "opcOffset": 0,
         "ddpDataOffset": 0,
         "kinetPort": 1,
-        "numPoints": 64,
+        "numPoints": 67,
         "spacing": 39.0
       },
       "children": {}
@@ -249,11 +249,11 @@
       "parameters": {
         "label": "ws28x_7_pd2",
         "x": 0.0,
-        "y": 0.0,
+        "y": 2700.0,
         "z": -60.0,
         "yaw": 0.0,
         "pitch": 0.0,
-        "roll": 90.0,
+        "roll": 270.0,
         "scale": 1.0,
         "selected": false,
         "deactivate": false,
@@ -275,7 +275,7 @@
         "opcOffset": 0,
         "ddpDataOffset": 0,
         "kinetPort": 1,
-        "numPoints": 64,
+        "numPoints": 67,
         "spacing": 39.0
       },
       "children": {}
@@ -289,11 +289,11 @@
       "parameters": {
         "label": "ws28x_8_pd2",
         "x": 15.0,
-        "y": 0.0,
+        "y": 2700.0,
         "z": 45.0,
         "yaw": 0.0,
         "pitch": 0.0,
-        "roll": 90.0,
+        "roll": 270.0,
         "scale": 1.0,
         "selected": false,
         "deactivate": false,
@@ -315,7 +315,7 @@
         "opcOffset": 0,
         "ddpDataOffset": 0,
         "kinetPort": 1,
-        "numPoints": 64,
+        "numPoints": 67,
         "spacing": 39.0
       },
       "children": {}
@@ -329,11 +329,11 @@
       "parameters": {
         "label": "ws28x_9_pd2",
         "x": -30.0,
-        "y": 0.0,
+        "y": 2700.0,
         "z": -30.0,
         "yaw": 0.0,
         "pitch": 0.0,
-        "roll": 90.0,
+        "roll": 270.0,
         "scale": 1.0,
         "selected": false,
         "deactivate": false,
@@ -355,7 +355,7 @@
         "opcOffset": 0,
         "ddpDataOffset": 0,
         "kinetPort": 1,
-        "numPoints": 64,
+        "numPoints": 67,
         "spacing": 39.0
       },
       "children": {}
@@ -369,11 +369,11 @@
       "parameters": {
         "label": "ws28x_10_pd2",
         "x": -60.0,
-        "y": 0.0,
+        "y": 2700.0,
         "z": 0.0,
         "yaw": 0.0,
         "pitch": 0.0,
-        "roll": 90.0,
+        "roll": 270.0,
         "scale": 1.0,
         "selected": false,
         "deactivate": false,
@@ -395,7 +395,7 @@
         "opcOffset": 0,
         "ddpDataOffset": 0,
         "kinetPort": 1,
-        "numPoints": 64,
+        "numPoints": 67,
         "spacing": 39.0
       },
       "children": {}
@@ -409,11 +409,11 @@
       "parameters": {
         "label": "ws28x_11_pd2",
         "x": 40.0,
-        "y": 0.0,
+        "y": 2700.0,
         "z": -40.0,
         "yaw": 0.0,
         "pitch": 0.0,
-        "roll": 90.0,
+        "roll": 270.0,
         "scale": 1.0,
         "selected": false,
         "deactivate": false,
@@ -435,7 +435,7 @@
         "opcOffset": 0,
         "ddpDataOffset": 0,
         "kinetPort": 1,
-        "numPoints": 64,
+        "numPoints": 67,
         "spacing": 39.0
       },
       "children": {}
@@ -449,11 +449,11 @@
       "parameters": {
         "label": "ws28x_12_pd2",
         "x": 30.0,
-        "y": 0.0,
+        "y": 2700.0,
         "z": 20.0,
         "yaw": 0.0,
         "pitch": 0.0,
-        "roll": 90.0,
+        "roll": 270.0,
         "scale": 1.0,
         "selected": false,
         "deactivate": false,
@@ -475,7 +475,7 @@
         "opcOffset": 0,
         "ddpDataOffset": 0,
         "kinetPort": 1,
-        "numPoints": 64,
+        "numPoints": 67,
         "spacing": 39.0
       },
       "children": {}
@@ -489,11 +489,11 @@
       "parameters": {
         "label": "ws28x_13_pd2",
         "x": -30.0,
-        "y": 0.0,
+        "y": 2700.0,
         "z": -15.0,
         "yaw": 0.0,
         "pitch": 0.0,
-        "roll": 90.0,
+        "roll": 270.0,
         "scale": 1.0,
         "selected": false,
         "deactivate": false,
@@ -515,7 +515,7 @@
         "opcOffset": 0,
         "ddpDataOffset": 0,
         "kinetPort": 1,
-        "numPoints": 64,
+        "numPoints": 67,
         "spacing": 39.0
       },
       "children": {}
@@ -529,11 +529,11 @@
       "parameters": {
         "label": "ws28x_14_pd2",
         "x": 75.0,
-        "y": 0.0,
+        "y": 2700.0,
         "z": 10.0,
         "yaw": 0.0,
         "pitch": 0.0,
-        "roll": 90.0,
+        "roll": 270.0,
         "scale": 1.0,
         "selected": false,
         "deactivate": false,
@@ -555,7 +555,7 @@
         "opcOffset": 0,
         "ddpDataOffset": 0,
         "kinetPort": 1,
-        "numPoints": 64,
+        "numPoints": 67,
         "spacing": 39.0
       },
       "children": {}
@@ -569,11 +569,11 @@
       "parameters": {
         "label": "ws28x_15_pd2",
         "x": -25.0,
-        "y": 0.0,
+        "y": 2700.0,
         "z": 30.0,
         "yaw": 0.0,
         "pitch": 0.0,
-        "roll": 90.0,
+        "roll": 270.0,
         "scale": 1.0,
         "selected": false,
         "deactivate": false,
@@ -595,7 +595,7 @@
         "opcOffset": 0,
         "ddpDataOffset": 0,
         "kinetPort": 1,
-        "numPoints": 64,
+        "numPoints": 67,
         "spacing": 39.0
       },
       "children": {}
@@ -609,11 +609,11 @@
       "parameters": {
         "label": "ws28x_16_pd2",
         "x": 35.0,
-        "y": 0.0,
+        "y": 2700.0,
         "z": -15.0,
         "yaw": 0.0,
         "pitch": 0.0,
-        "roll": 90.0,
+        "roll": 270.0,
         "scale": 1.0,
         "selected": true,
         "deactivate": false,
@@ -635,7 +635,7 @@
         "opcOffset": 0,
         "ddpDataOffset": 0,
         "kinetPort": 1,
-        "numPoints": 64,
+        "numPoints": 67,
         "spacing": 39.0
       },
       "children": {}

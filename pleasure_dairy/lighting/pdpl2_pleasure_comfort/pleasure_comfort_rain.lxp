@@ -1,6 +1,6 @@
 {
   "version": "0.4.1",
-  "timestamp": 1691692978684,
+  "timestamp": 1692076895415,
   "model": {
     "id": 2,
     "class": "heronarts.lx.structure.LXStructure",
@@ -9,7 +9,7 @@
     },
     "parameters": {
       "label": "LX",
-      "syncModelFile": false
+      "syncModelFile": true
     },
     "children": {},
     "output": {
@@ -23,7 +23,7 @@
         "enabled": true,
         "brightness": 1.0,
         "fps": 0.0,
-        "gamma": 1.0,
+        "gamma": 4.0,
         "gammaMode": 1
       },
       "children": {}
@@ -38,11 +38,11 @@
         "parameters": {
           "label": "ws28x_1_pd2",
           "x": 0.0,
-          "y": 0.0,
+          "y": 2700.0,
           "z": 0.0,
           "yaw": 0.0,
           "pitch": 0.0,
-          "roll": 90.0,
+          "roll": 270.0,
           "scale": 1.0,
           "selected": false,
           "deactivate": false,
@@ -64,7 +64,7 @@
           "opcOffset": 0,
           "ddpDataOffset": 0,
           "kinetPort": 1,
-          "numPoints": 64,
+          "numPoints": 67,
           "spacing": 39.0
         },
         "children": {}
@@ -78,11 +78,11 @@
         "parameters": {
           "label": "ws28x_2_pd2",
           "x": 60.0,
-          "y": 0.0,
+          "y": 2700.0,
           "z": -15.0,
           "yaw": 0.0,
           "pitch": 0.0,
-          "roll": 90.0,
+          "roll": 270.0,
           "scale": 1.0,
           "selected": false,
           "deactivate": false,
@@ -104,7 +104,7 @@
           "opcOffset": 0,
           "ddpDataOffset": 0,
           "kinetPort": 1,
-          "numPoints": 64,
+          "numPoints": 67,
           "spacing": 39.0
         },
         "children": {}
@@ -118,11 +118,11 @@
         "parameters": {
           "label": "ws28x_3_pd2",
           "x": 60.0,
-          "y": 0.0,
+          "y": 2700.0,
           "z": 45.0,
           "yaw": 0.0,
           "pitch": 0.0,
-          "roll": 90.0,
+          "roll": 270.0,
           "scale": 1.0,
           "selected": false,
           "deactivate": false,
@@ -144,7 +144,7 @@
           "opcOffset": 0,
           "ddpDataOffset": 0,
           "kinetPort": 1,
-          "numPoints": 64,
+          "numPoints": 67,
           "spacing": 39.0
         },
         "children": {}
@@ -158,11 +158,11 @@
         "parameters": {
           "label": "ws28x_4_pd2",
           "x": -60.0,
-          "y": 0.0,
+          "y": 2700.0,
           "z": 0.0,
           "yaw": 0.0,
           "pitch": 0.0,
-          "roll": 90.0,
+          "roll": 270.0,
           "scale": 1.0,
           "selected": false,
           "deactivate": false,
@@ -184,7 +184,7 @@
           "opcOffset": 0,
           "ddpDataOffset": 0,
           "kinetPort": 1,
-          "numPoints": 64,
+          "numPoints": 67,
           "spacing": 39.0
         },
         "children": {}
@@ -198,11 +198,11 @@
         "parameters": {
           "label": "ws28x_5_pd2",
           "x": -30.0,
-          "y": 0.0,
+          "y": 2700.0,
           "z": 55.0,
           "yaw": 0.0,
           "pitch": 0.0,
-          "roll": 90.0,
+          "roll": 270.0,
           "scale": 1.0,
           "selected": false,
           "deactivate": false,
@@ -224,7 +224,7 @@
           "opcOffset": 0,
           "ddpDataOffset": 0,
           "kinetPort": 1,
-          "numPoints": 64,
+          "numPoints": 67,
           "spacing": 39.0
         },
         "children": {}
@@ -238,11 +238,11 @@
         "parameters": {
           "label": "ws28x_6_pd2",
           "x": 0.0,
-          "y": 0.0,
+          "y": 2700.0,
           "z": 75.0,
           "yaw": 0.0,
           "pitch": 0.0,
-          "roll": 90.0,
+          "roll": 270.0,
           "scale": 1.0,
           "selected": false,
           "deactivate": false,
@@ -264,7 +264,7 @@
           "opcOffset": 0,
           "ddpDataOffset": 0,
           "kinetPort": 1,
-          "numPoints": 64,
+          "numPoints": 67,
           "spacing": 39.0
         },
         "children": {}
@@ -278,11 +278,11 @@
         "parameters": {
           "label": "ws28x_7_pd2",
           "x": 0.0,
-          "y": 0.0,
+          "y": 2700.0,
           "z": -60.0,
           "yaw": 0.0,
           "pitch": 0.0,
-          "roll": 90.0,
+          "roll": 270.0,
           "scale": 1.0,
           "selected": false,
           "deactivate": false,
@@ -304,7 +304,7 @@
           "opcOffset": 0,
           "ddpDataOffset": 0,
           "kinetPort": 1,
-          "numPoints": 64,
+          "numPoints": 67,
           "spacing": 39.0
         },
         "children": {}
@@ -318,11 +318,11 @@
         "parameters": {
           "label": "ws28x_8_pd2",
           "x": 15.0,
-          "y": 0.0,
+          "y": 2700.0,
           "z": 45.0,
           "yaw": 0.0,
           "pitch": 0.0,
-          "roll": 90.0,
+          "roll": 270.0,
           "scale": 1.0,
           "selected": false,
           "deactivate": false,
@@ -344,7 +344,7 @@
           "opcOffset": 0,
           "ddpDataOffset": 0,
           "kinetPort": 1,
-          "numPoints": 64,
+          "numPoints": 67,
           "spacing": 39.0
         },
         "children": {}
@@ -358,11 +358,11 @@
         "parameters": {
           "label": "ws28x_9_pd2",
           "x": -30.0,
-          "y": 0.0,
+          "y": 2700.0,
           "z": -30.0,
           "yaw": 0.0,
           "pitch": 0.0,
-          "roll": 90.0,
+          "roll": 270.0,
           "scale": 1.0,
           "selected": false,
           "deactivate": false,
@@ -384,7 +384,7 @@
           "opcOffset": 0,
           "ddpDataOffset": 0,
           "kinetPort": 1,
-          "numPoints": 64,
+          "numPoints": 67,
           "spacing": 39.0
         },
         "children": {}
@@ -398,11 +398,11 @@
         "parameters": {
           "label": "ws28x_10_pd2",
           "x": -60.0,
-          "y": 0.0,
+          "y": 2700.0,
           "z": 0.0,
           "yaw": 0.0,
           "pitch": 0.0,
-          "roll": 90.0,
+          "roll": 270.0,
           "scale": 1.0,
           "selected": false,
           "deactivate": false,
@@ -424,7 +424,7 @@
           "opcOffset": 0,
           "ddpDataOffset": 0,
           "kinetPort": 1,
-          "numPoints": 64,
+          "numPoints": 67,
           "spacing": 39.0
         },
         "children": {}
@@ -438,11 +438,11 @@
         "parameters": {
           "label": "ws28x_11_pd2",
           "x": 40.0,
-          "y": 0.0,
+          "y": 2700.0,
           "z": -40.0,
           "yaw": 0.0,
           "pitch": 0.0,
-          "roll": 90.0,
+          "roll": 270.0,
           "scale": 1.0,
           "selected": false,
           "deactivate": false,
@@ -464,7 +464,7 @@
           "opcOffset": 0,
           "ddpDataOffset": 0,
           "kinetPort": 1,
-          "numPoints": 64,
+          "numPoints": 67,
           "spacing": 39.0
         },
         "children": {}
@@ -478,11 +478,11 @@
         "parameters": {
           "label": "ws28x_12_pd2",
           "x": 30.0,
-          "y": 0.0,
+          "y": 2700.0,
           "z": 20.0,
           "yaw": 0.0,
           "pitch": 0.0,
-          "roll": 90.0,
+          "roll": 270.0,
           "scale": 1.0,
           "selected": false,
           "deactivate": false,
@@ -504,7 +504,7 @@
           "opcOffset": 0,
           "ddpDataOffset": 0,
           "kinetPort": 1,
-          "numPoints": 64,
+          "numPoints": 67,
           "spacing": 39.0
         },
         "children": {}
@@ -518,11 +518,11 @@
         "parameters": {
           "label": "ws28x_13_pd2",
           "x": -30.0,
-          "y": 0.0,
+          "y": 2700.0,
           "z": -15.0,
           "yaw": 0.0,
           "pitch": 0.0,
-          "roll": 90.0,
+          "roll": 270.0,
           "scale": 1.0,
           "selected": false,
           "deactivate": false,
@@ -544,7 +544,7 @@
           "opcOffset": 0,
           "ddpDataOffset": 0,
           "kinetPort": 1,
-          "numPoints": 64,
+          "numPoints": 67,
           "spacing": 39.0
         },
         "children": {}
@@ -558,11 +558,11 @@
         "parameters": {
           "label": "ws28x_14_pd2",
           "x": 75.0,
-          "y": 0.0,
+          "y": 2700.0,
           "z": 10.0,
           "yaw": 0.0,
           "pitch": 0.0,
-          "roll": 90.0,
+          "roll": 270.0,
           "scale": 1.0,
           "selected": false,
           "deactivate": false,
@@ -584,7 +584,7 @@
           "opcOffset": 0,
           "ddpDataOffset": 0,
           "kinetPort": 1,
-          "numPoints": 64,
+          "numPoints": 67,
           "spacing": 39.0
         },
         "children": {}
@@ -598,11 +598,11 @@
         "parameters": {
           "label": "ws28x_15_pd2",
           "x": -25.0,
-          "y": 0.0,
+          "y": 2700.0,
           "z": 30.0,
           "yaw": 0.0,
           "pitch": 0.0,
-          "roll": 90.0,
+          "roll": 270.0,
           "scale": 1.0,
           "selected": false,
           "deactivate": false,
@@ -624,7 +624,7 @@
           "opcOffset": 0,
           "ddpDataOffset": 0,
           "kinetPort": 1,
-          "numPoints": 64,
+          "numPoints": 67,
           "spacing": 39.0
         },
         "children": {}
@@ -638,11 +638,11 @@
         "parameters": {
           "label": "ws28x_16_pd2",
           "x": 35.0,
-          "y": 0.0,
+          "y": 2700.0,
           "z": -15.0,
           "yaw": 0.0,
           "pitch": 0.0,
-          "roll": 90.0,
+          "roll": 270.0,
           "scale": 1.0,
           "selected": true,
           "deactivate": false,
@@ -664,7 +664,7 @@
           "opcOffset": 0,
           "ddpDataOffset": 0,
           "kinetPort": 1,
-          "numPoints": 64,
+          "numPoints": 67,
           "spacing": 39.0
         },
         "children": {}
@@ -1129,7 +1129,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.2950689701352293
+                        "basis": 0.1469203496833375
                       },
                       {
                         "id": 4754,
@@ -1156,7 +1156,7 @@
                           "triggerOut": false
                         },
                         "children": {},
-                        "basis": 0.03281212121284767
+                        "basis": 0.723539393940278
                       }
                     ],
                     "modulations": [
@@ -1317,7 +1317,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.9627333333346607
+                        "basis": 0.4861333333352823
                       }
                     ],
                     "modulations": [
@@ -1373,10 +1373,10 @@
               "viewEnabled": false,
               "viewSelector": "",
               "viewNormalization": 0,
-              "autoCycleEnabled": false,
+              "autoCycleEnabled": true,
               "autoCycleMode": 0,
               "autoCycleTimeSecs": 60.0,
-              "transitionEnabled": false,
+              "transitionEnabled": true,
               "transitionTimeSecs": 5.0,
               "transitionBlendMode": 0,
               "focusedPattern": 0,
@@ -1431,14 +1431,14 @@
                         },
                         "parameters": {
                           "label": "LFO",
-                          "running": false,
+                          "running": true,
                           "trigger": false,
-                          "loop": false,
+                          "loop": true,
                           "tempoSync": false,
                           "tempoMultiplier": 5,
                           "tempoLock": true,
-                          "clockMode": 0,
-                          "periodFast": 4171.546922565322,
+                          "clockMode": 1,
+                          "periodFast": 50000.0,
                           "periodSlow": 10000.0,
                           "wave": 0,
                           "skew": -1.0,
@@ -1448,7 +1448,7 @@
                           "exp": 0.3600000000000003
                         },
                         "children": {},
-                        "basis": 1.0
+                        "basis": 0.5968163325778757
                       }
                     ],
                     "modulations": [
@@ -1471,11 +1471,96 @@
                           "label": "LX",
                           "enabled": true,
                           "polarity": 0,
-                          "range": 1.0
+                          "range": 0.2
                         },
                         "children": {}
                       }
                     ],
+                    "triggers": []
+                  }
+                },
+                "deviceVersion": -1
+              },
+              {
+                "id": 7033,
+                "class": "heronarts.lx.pattern.texture.NoisePattern",
+                "internal": {
+                  "modulationColor": 0,
+                  "expanded": true,
+                  "modulationExpanded": true,
+                  "autoCycleEligible": true
+                },
+                "parameters": {
+                  "label": "Noise",
+                  "recall": false,
+                  "midpoint": 0.0,
+                  "contrast": 0.0,
+                  "xOffset": 0.0,
+                  "yOffset": 0.0,
+                  "zOffset": 0.0,
+                  "scale": 0.5,
+                  "minScale": 1.0,
+                  "maxScale": 10.0,
+                  "xScale": 1.0,
+                  "yScale": 1.0,
+                  "zScale": 1.0,
+                  "motion": false,
+                  "motionSpeed": 0.0,
+                  "motionSpeedRange": 128.0,
+                  "xMotion": 0.0,
+                  "yMotion": 0.0,
+                  "zMotion": 1.0,
+                  "algorithm": 0,
+                  "seed": 0,
+                  "octaves": 3,
+                  "lacunarity": 2.0,
+                  "gain": 0.5,
+                  "ridgeOffset": 0.9,
+                  "xMode": 0,
+                  "yMode": 0,
+                  "zMode": 0
+                },
+                "children": {
+                  "modulation": {
+                    "id": 7034,
+                    "class": "heronarts.lx.modulation.LXModulationEngine",
+                    "internal": {
+                      "modulationColor": 0
+                    },
+                    "parameters": {
+                      "label": "Modulation"
+                    },
+                    "children": {},
+                    "modulators": [
+                      {
+                        "id": 7039,
+                        "class": "heronarts.lx.modulator.Randomizer",
+                        "internal": {
+                          "modulationColor": 0
+                        },
+                        "parameters": {
+                          "label": "Random",
+                          "running": true,
+                          "trigger": false,
+                          "loop": true,
+                          "tempoSync": false,
+                          "tempoMultiplier": 5,
+                          "tempoLock": true,
+                          "periodMs": 1000.0,
+                          "randomMs": 0.0,
+                          "chance": 100.0,
+                          "damping": true,
+                          "speed": 5.0,
+                          "accel": 5.0,
+                          "min": 0.0,
+                          "max": 1.0,
+                          "triggerOut": false
+                        },
+                        "children": {},
+                        "basis": 0.09900000000020806
+                      }
+                    ],
+                    "modulations": [],
                     "triggers": []
                   }
                 },
@@ -1714,21 +1799,21 @@
         "centerPoint": false,
         "camera": {
           "active": true,
-          "radius": 4743.166318962352,
-          "theta": 34.07074296777258,
-          "phi": 0.47284714318811893,
+          "radius": 2720.730786504418,
+          "theta": 32.09693070617626,
+          "phi": 0.8176195472478867,
           "x": 7.5,
-          "y": 1228.5,
+          "y": 1413.0,
           "z": 7.5
         },
         "cue": [
           {
             "active": true,
-            "radius": 4743.166318962352,
-            "theta": 34.07074296777258,
-            "phi": 0.47284714318811893,
+            "radius": 2720.730786504418,
+            "theta": 32.09693070617626,
+            "phi": 0.8176195472478867,
             "x": 7.5,
-            "y": 1228.5,
+            "y": 1413.0,
             "z": 7.5
           },
           {
