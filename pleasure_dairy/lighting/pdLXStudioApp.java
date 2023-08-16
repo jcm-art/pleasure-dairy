@@ -199,7 +199,7 @@ public class LXStudioApp extends PApplet implements LXPlugin {
     int i = 0;
     int nextFileNumber = 1;
     // Replace with second .lxp file for testing
-    File projectFile2 = new File("/home/zackwoodruff/git/pleasure-dairy/pleasure_dairy/lighting/scratch_pad/test-ring2.lxp");
+    File projectFile2 = new File(System.getProperty("user.home") + "/git/pleasure-dairy/pleasure_dairy/lighting/scratch_pad/test-ring2.lxp");
 
     // Control loop
     while(true) {
