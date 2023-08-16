@@ -19,6 +19,15 @@ echo "deb [signed-by=/etc/apt/keyrings/adoptium.asc] https://packages.adoptium.n
 sudo apt update # update if you haven't already
 sudo apt install temurin-17-jdk -y
 
+# Clone repositories
+sudo apt-get install git -y
+mkdir ~/git
+# Pleasure Dairy
+git -C ~/git clone https://github.com/jcm-art/pleasure-dairy.git
+git -C ~/git/pleasure-dairy/ submodule update --init --recursive
+# LX Studio
+# git -C ~/git clone https://github.com/heronarts/LXStudio-IDE.git
+
 # Install Eclipse
 # List of mirrors here: https://www.eclipse.org/downloads/download.php?file=/oomph/epp/2023-06/R/eclipse-inst-jre-linux-aarch64.tar.gz
 if [[ $HEADLESS -eq 0 ]]
@@ -27,15 +36,3 @@ if [[ $HEADLESS -eq 0 ]]
   tar xvzf ./eclipse-workspace/eclipse-inst-jre-linux-aarch64.tar.gz
   ~/eclipse-installer/eclipse-inst
 fi
-
-# Clone repositories
-# Pleasure Dairy
-sudo apt-get install git -y
-mkdir ~/git
-# Pleasure Dairy
-git -C ~/git clone git@github.com:jcm-art/pleasure-dairy.git
-git -C ~/git/pleasure-dairy/ submodule update --init --recursive
-# LX Studio
-git -C ~/git clone git@github.com:heronarts/LXStudio-IDE.git
-
-
