@@ -1,6 +1,6 @@
 {
   "version": "0.4.1",
-  "timestamp": 1692229356914,
+  "timestamp": 1692229302880,
   "model": {
     "id": 2,
     "class": "heronarts.lx.structure.LXStructure",
@@ -49,7 +49,7 @@
           "enabled": true,
           "brightness": 1.0,
           "identify": false,
-          "mute": true,
+          "mute": false,
           "solo": false,
           "tags": "strip",
           "protocol": 2,
@@ -89,7 +89,7 @@
           "enabled": true,
           "brightness": 1.0,
           "identify": false,
-          "mute": true,
+          "mute": false,
           "solo": false,
           "tags": "strip",
           "protocol": 2,
@@ -129,7 +129,7 @@
           "enabled": true,
           "brightness": 1.0,
           "identify": false,
-          "mute": true,
+          "mute": false,
           "solo": false,
           "tags": "strip",
           "protocol": 2,
@@ -169,7 +169,7 @@
           "enabled": true,
           "brightness": 1.0,
           "identify": false,
-          "mute": true,
+          "mute": false,
           "solo": false,
           "tags": "strip",
           "protocol": 2,
@@ -209,7 +209,7 @@
           "enabled": true,
           "brightness": 1.0,
           "identify": false,
-          "mute": true,
+          "mute": false,
           "solo": false,
           "tags": "strip",
           "protocol": 2,
@@ -249,7 +249,7 @@
           "enabled": true,
           "brightness": 1.0,
           "identify": false,
-          "mute": true,
+          "mute": false,
           "solo": false,
           "tags": "strip",
           "protocol": 2,
@@ -289,7 +289,7 @@
           "enabled": true,
           "brightness": 1.0,
           "identify": false,
-          "mute": true,
+          "mute": false,
           "solo": false,
           "tags": "strip",
           "protocol": 2,
@@ -329,7 +329,7 @@
           "enabled": true,
           "brightness": 1.0,
           "identify": false,
-          "mute": false,
+          "mute": true,
           "solo": false,
           "tags": "strip",
           "protocol": 2,
@@ -369,7 +369,7 @@
           "enabled": true,
           "brightness": 1.0,
           "identify": false,
-          "mute": false,
+          "mute": true,
           "solo": false,
           "tags": "strip",
           "protocol": 2,
@@ -409,7 +409,7 @@
           "enabled": true,
           "brightness": 1.0,
           "identify": false,
-          "mute": false,
+          "mute": true,
           "solo": false,
           "tags": "strip",
           "protocol": 2,
@@ -449,7 +449,7 @@
           "enabled": true,
           "brightness": 1.0,
           "identify": false,
-          "mute": true,
+          "mute": false,
           "solo": false,
           "tags": "strip",
           "protocol": 2,
@@ -489,7 +489,7 @@
           "enabled": true,
           "brightness": 1.0,
           "identify": false,
-          "mute": true,
+          "mute": false,
           "solo": false,
           "tags": "strip",
           "protocol": 2,
@@ -529,7 +529,7 @@
           "enabled": true,
           "brightness": 1.0,
           "identify": false,
-          "mute": false,
+          "mute": true,
           "solo": false,
           "tags": "strip",
           "protocol": 2,
@@ -569,7 +569,7 @@
           "enabled": true,
           "brightness": 1.0,
           "identify": false,
-          "mute": true,
+          "mute": false,
           "solo": false,
           "tags": "strip",
           "protocol": 2,
@@ -609,7 +609,7 @@
           "enabled": true,
           "brightness": 1.0,
           "identify": false,
-          "mute": true,
+          "mute": false,
           "solo": false,
           "tags": "strip",
           "protocol": 2,
@@ -630,7 +630,7 @@
         "children": {}
       }
     ],
-    "file": "/Users/justinmartin/Desktop/dev/pleasure-dairy/pleasure_dairy/lighting/scene_models/pdpl3_bar_frontage_mural_only.lxm"
+    "file": "/Users/justinmartin/Desktop/dev/pleasure-dairy/pleasure_dairy/lighting/scene_models/pdpl3_bar_frontage_no_mural.lxm"
   },
   "engine": {
     "id": 1,
@@ -768,7 +768,7 @@
           "scene-5": false,
           "crossfader": 0.48305084742605686,
           "crossfaderBlendMode": 0,
-          "focusedChannel": 0,
+          "focusedChannel": 1,
           "cueA": false,
           "cueB": false,
           "viewCondensed": false
@@ -783,7 +783,7 @@
             "parameters": {
               "label": "Master",
               "arm": false,
-              "selected": false
+              "selected": true
             },
             "children": {},
             "effects": [],
@@ -801,7 +801,7 @@
             "parameters": {
               "label": "Pattern",
               "arm": false,
-              "selected": true,
+              "selected": false,
               "enabled": true,
               "cue": false,
               "fader": 1.0,
@@ -824,7 +824,7 @@
             "children": {},
             "effects": [],
             "clips": [],
-            "patternIndex": 0,
+            "patternIndex": 2,
             "patterns": [
               {
                 "id": 266,
@@ -881,7 +881,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.05775157884535158
+                        "basis": 0.09164068886166549
                       }
                     ],
                     "modulations": [
@@ -1381,8 +1381,8 @@
         "camera": {
           "active": true,
           "radius": 12393.490934897532,
-          "theta": 2.0583524827391875,
-          "phi": 0.6825203886255622,
+          "theta": -4.20872272807052,
+          "phi": 0.7630740543827415,
           "x": 620.939235933125,
           "y": 880.6217322349548,
           "z": 917.209080003202
@@ -1391,8 +1391,8 @@
           {
             "active": true,
             "radius": 12393.490934897532,
-            "theta": 2.0583524827391875,
-            "phi": 0.6825203886255622,
+            "theta": -4.20872272807052,
+            "phi": 0.7630740543827415,
             "x": 620.939235933125,
             "y": 880.6217322349548,
             "z": 917.209080003202
