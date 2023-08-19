@@ -1,6 +1,6 @@
 {
   "version": "0.4.1",
-  "timestamp": 1692483036415,
+  "timestamp": 1692483152466,
   "model": {
     "id": 2,
     "class": "heronarts.lx.structure.LXStructure",
@@ -44,12 +44,12 @@
           "pitch": 0.0,
           "roll": 90.0,
           "scale": 1.0,
-          "selected": false,
+          "selected": true,
           "deactivate": false,
           "enabled": true,
           "brightness": 1.0,
           "identify": false,
-          "mute": false,
+          "mute": true,
           "solo": false,
           "tags": "strip",
           "protocol": 2,
@@ -89,7 +89,7 @@
           "enabled": true,
           "brightness": 1.0,
           "identify": false,
-          "mute": false,
+          "mute": true,
           "solo": false,
           "tags": "strip",
           "protocol": 2,
@@ -129,7 +129,7 @@
           "enabled": true,
           "brightness": 1.0,
           "identify": false,
-          "mute": false,
+          "mute": true,
           "solo": false,
           "tags": "strip",
           "protocol": 2,
@@ -169,7 +169,7 @@
           "enabled": true,
           "brightness": 1.0,
           "identify": false,
-          "mute": false,
+          "mute": true,
           "solo": false,
           "tags": "strip",
           "protocol": 2,
@@ -209,7 +209,7 @@
           "enabled": true,
           "brightness": 1.0,
           "identify": false,
-          "mute": false,
+          "mute": true,
           "solo": false,
           "tags": "strip",
           "protocol": 2,
@@ -249,7 +249,7 @@
           "enabled": true,
           "brightness": 1.0,
           "identify": false,
-          "mute": false,
+          "mute": true,
           "solo": false,
           "tags": "strip",
           "protocol": 2,
@@ -289,7 +289,7 @@
           "enabled": true,
           "brightness": 1.0,
           "identify": false,
-          "mute": false,
+          "mute": true,
           "solo": false,
           "tags": "strip",
           "protocol": 2,
@@ -329,7 +329,7 @@
           "enabled": true,
           "brightness": 1.0,
           "identify": false,
-          "mute": false,
+          "mute": true,
           "solo": false,
           "tags": "strip",
           "protocol": 2,
@@ -1024,7 +1024,7 @@
           "pitch": 0.0,
           "roll": 0.0,
           "scale": 1.0,
-          "selected": true,
+          "selected": false,
           "deactivate": false,
           "enabled": true,
           "brightness": 1.0,
@@ -1054,7 +1054,7 @@
         "children": {}
       }
     ],
-    "file": "/Users/justinmartin/Desktop/dev/pleasure-dairy/pleasure_dairy/lighting/scene_models/pdpl1_pleasure_justice.lxm"
+    "file": "/Users/justinmartin/Desktop/dev/pleasure-dairy/pleasure_dairy/lighting/scene_models/pdpl1_pleasure_justice_continent_only.lxm"
   },
   "engine": {
     "id": 1,
@@ -1113,8 +1113,27 @@
                   "mode": 0,
                   "period": 30.0,
                   "primary/brightness": 100.0,
-                  "primary/saturation": 100.0,
-                  "primary/hue": 0.0,
+                  "primary/saturation": 83.33332824707031,
+                  "primary/hue": 42.0,
+                  "secondary/brightness": 100.0,
+                  "secondary/saturation": 100.0,
+                  "secondary/hue": 120.0
+                },
+                "children": {}
+              },
+              {
+                "id": 5211,
+                "class": "heronarts.lx.color.LXDynamicColor",
+                "internal": {
+                  "modulationColor": 0
+                },
+                "parameters": {
+                  "label": "LX",
+                  "mode": 0,
+                  "period": 30.0,
+                  "primary/brightness": 100.0,
+                  "primary/saturation": 75.83333587646484,
+                  "primary/hue": 270.0,
                   "secondary/brightness": 100.0,
                   "secondary/saturation": 100.0,
                   "secondary/hue": 120.0
@@ -1216,7 +1235,7 @@
         },
         "channels": [
           {
-            "id": 4955,
+            "id": 5290,
             "class": "heronarts.lx.mixer.LXChannel",
             "internal": {
               "modulationColor": 0,
@@ -1251,12 +1270,12 @@
             "patternIndex": 0,
             "patterns": [
               {
-                "id": 5107,
+                "id": 5302,
                 "class": "heronarts.lx.pattern.texture.NoisePattern",
                 "internal": {
                   "modulationColor": 0,
                   "expanded": true,
-                  "modulationExpanded": true,
+                  "modulationExpanded": false,
                   "autoCycleEligible": true
                 },
                 "parameters": {
@@ -1274,7 +1293,7 @@
                   "yScale": 1.0,
                   "zScale": 1.0,
                   "motion": true,
-                  "motionSpeed": 0.735849067568779,
+                  "motionSpeed": 0.49056604504585266,
                   "motionSpeedRange": 128.0,
                   "xMotion": 0.0,
                   "yMotion": 0.0,
@@ -1291,145 +1310,7 @@
                 },
                 "children": {
                   "modulation": {
-                    "id": 5108,
-                    "class": "heronarts.lx.modulation.LXModulationEngine",
-                    "internal": {
-                      "modulationColor": 0
-                    },
-                    "parameters": {
-                      "label": "Modulation"
-                    },
-                    "children": {},
-                    "modulators": [
-                      {
-                        "id": 5113,
-                        "class": "heronarts.lx.modulator.VariableLFO",
-                        "internal": {
-                          "modulationColor": 0
-                        },
-                        "parameters": {
-                          "label": "LFO",
-                          "running": true,
-                          "trigger": false,
-                          "loop": true,
-                          "tempoSync": false,
-                          "tempoMultiplier": 5,
-                          "tempoLock": true,
-                          "clockMode": 0,
-                          "periodFast": 5581.224107694742,
-                          "periodSlow": 10000.0,
-                          "wave": 0,
-                          "skew": 0.0,
-                          "shape": 0.0,
-                          "bias": 0.0,
-                          "phase": 0.0,
-                          "exp": 0.0
-                        },
-                        "children": {},
-                        "basis": 0.6307766792825529
-                      }
-                    ],
-                    "modulations": [
-                      {
-                        "source": {
-                          "id": 5113,
-                          "path": "/modulation/modulator/1"
-                        },
-                        "target": {
-                          "componentId": 5107,
-                          "parameterPath": "motionSpeed",
-                          "path": "/motionSpeed"
-                        },
-                        "id": 5114,
-                        "class": "heronarts.lx.modulation.LXCompoundModulation",
-                        "internal": {
-                          "modulationColor": 0
-                        },
-                        "parameters": {
-                          "label": "LX",
-                          "enabled": true,
-                          "polarity": 0,
-                          "range": 0.5
-                        },
-                        "children": {}
-                      }
-                    ],
-                    "triggers": []
-                  }
-                },
-                "deviceVersion": -1
-              }
-            ]
-          },
-          {
-            "id": 5115,
-            "class": "heronarts.lx.mixer.LXChannel",
-            "internal": {
-              "modulationColor": 0,
-              "controlsExpanded": true
-            },
-            "parameters": {
-              "label": "Channel-2",
-              "arm": false,
-              "selected": false,
-              "enabled": true,
-              "cue": false,
-              "fader": 1.0,
-              "crossfadeGroup": 0,
-              "blendMode": 0,
-              "midiMonitor": false,
-              "midiChannel": 16,
-              "viewEnabled": false,
-              "viewSelector": "",
-              "viewNormalization": 0,
-              "autoCycleEnabled": false,
-              "autoCycleMode": 0,
-              "autoCycleTimeSecs": 60.0,
-              "transitionEnabled": false,
-              "transitionTimeSecs": 5.0,
-              "transitionBlendMode": 0,
-              "focusedPattern": 0,
-              "triggerPatternCycle": false
-            },
-            "children": {},
-            "effects": [],
-            "clips": [],
-            "patternIndex": 0,
-            "patterns": [
-              {
-                "id": 5127,
-                "class": "heronarts.lx.pattern.color.GradientPattern",
-                "internal": {
-                  "modulationColor": 0,
-                  "expanded": true,
-                  "modulationExpanded": false,
-                  "autoCycleEligible": true
-                },
-                "parameters": {
-                  "label": "Gradient",
-                  "recall": false,
-                  "xAmount": 0.0,
-                  "yAmount": 0.0,
-                  "zAmount": 0.0,
-                  "xOffset": 0.0,
-                  "yOffset": 0.0,
-                  "zOffset": 0.0,
-                  "colorMode": 1,
-                  "blendMode": 1,
-                  "gradient": 0.0,
-                  "fixedColor/brightness": 100.0,
-                  "fixedColor/saturation": 100.0,
-                  "fixedColor/hue": 0.0,
-                  "xMode": 0,
-                  "yMode": 0,
-                  "zMode": 0,
-                  "paletteIndex": 1,
-                  "paletteStops": 5,
-                  "gradientRange": 360.0
-                },
-                "children": {
-                  "modulation": {
-                    "id": 5128,
+                    "id": 5303,
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0
@@ -1650,7 +1531,7 @@
         "camera": {
           "active": true,
           "radius": 7534.5,
-          "theta": 0.48083448526571004,
+          "theta": 0.45666838553855627,
           "phi": 0.567903183400631,
           "x": 2488.5,
           "y": 1261.5,
@@ -1660,7 +1541,7 @@
           {
             "active": true,
             "radius": 7534.5,
-            "theta": 0.48083448526571004,
+            "theta": 0.45666838553855627,
             "phi": 0.567903183400631,
             "x": 2488.5,
             "y": 1261.5,
