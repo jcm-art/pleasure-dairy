@@ -10,13 +10,11 @@ import time
 
 #import RPi.GPIO as GPIO
 
-
 # Pi 3/4 have two built-in audio interfaces: 3.5mm and HDMI.  Extra USB audio
 # interfaces are expected to show up in indices 2 & 3, though that may not be
 # stable.  Order of sub/main is arbitrary.
-#SUB_INDEX = 2
-#MAIN_INDEX = 3
 SUB_INDEX = 2
+#MAIN_INDEX = 3
 MAIN_INDEX = 0
 
 BUTTON_PIN = 17
@@ -33,7 +31,7 @@ def LX(lxp):
 def load_scenes():
     """ Load audio and LXP files for each scene in the current directory.
 
-    Any directory beginning with `scene` containing exactly 
+    Any directory beginning with `scene` containing exactly
     - one .lxp file and
     - two .wav files with naming pattern *.main.wav and *.sub.wav
     will be interpreted as a scene.  The wav files are opened immediately
@@ -79,16 +77,26 @@ def launch_lxp(lxp, stop):
     # TODO: kill it
     # Send the signal to all the process groups
     os.killpg(os.getpgid(lx.pid), signal.SIGTERM)
-    
-    
+
 def init_gpio():
     print("GPIO INIT HERE")
     #GPIO.setmode(GPIO.BCM)
     #GPIO.setup(BUTTON_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     #GPIO.add_event_detect(BUTTON_PIN, GPIO.FALLING, callback=button_callback, bouncetime=200)
 
-def button_callback():
-    print("hello world")
+def button_callback(channel):
+    print("Button pressed")
+    next_scene()
+
+def next_scene()
+    #TODO: set stop signal to join threads & stop devices.
+    #stop.set()
+
+    #TODO:
+    # Start playing next scene
+    #scenes[current_scene].play(main_out,main_out,stop)
+
+    #TODO: Unset stop signal, set timer
 
 class Scene:
     def __init__(self, lxp, main_wav, sub_wav):
@@ -111,28 +119,29 @@ if __name__ == "__main__":
     init_gpio()
 
     main_out = make_output(MAIN_INDEX)
-    
+    # TODO: Uncomment this, was having issues running on a laptop with this index but should work on RPi
     #sub_out = make_output(SUB_INDEX)
     stop = threading.Event()
 
     scenes = load_scenes()
 
-    # TODO: main loop.  Unset stop signal, set timer & listen to button.
-    # catch exception and set stop signal to join threads & stop devices.
-    # Start next one.
-    
+    # TODO: Start playing first scene
     #scenes[0].play(main_out,main_out,stop)
-    
-    ## Keep the program running
+
+    # Main loop
     try:
         while True:
             time.sleep(0.1)
+            # TODO Check timeout
+            # next_scene()
     except KeyboardInterrupt:
         pass
     finally:
         print("GPIO CLEANUP")
         #GPIO.cleanup()
-    
-    
-    
-    
+
+
+
+
+
+
