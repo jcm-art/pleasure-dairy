@@ -1,6 +1,6 @@
 {
   "version": "0.4.1",
-  "timestamp": 1692485822718,
+  "timestamp": 1692568456242,
   "model": {
     "id": 2,
     "class": "heronarts.lx.structure.LXStructure",
@@ -56,7 +56,7 @@
           "byteOrder": 3,
           "transport": 0,
           "reverse": false,
-          "host": "192.168.0.10",
+          "host": "192.168.0.40",
           "port": 7890,
           "dmxChannel": 1,
           "artNetUniverse": 1,
@@ -96,7 +96,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "192.168.0.10",
+          "host": "192.168.0.60",
           "port": 7890,
           "dmxChannel": 1,
           "artNetUniverse": 2,
@@ -136,7 +136,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "192.168.0.10",
+          "host": "192.168.0.40",
           "port": 7890,
           "dmxChannel": 1,
           "artNetUniverse": 3,
@@ -176,7 +176,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "192.168.0.10",
+          "host": "192.168.0.60",
           "port": 7890,
           "dmxChannel": 1,
           "artNetUniverse": 4,
@@ -216,7 +216,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "192.168.0.10",
+          "host": "192.168.0.60",
           "port": 7890,
           "dmxChannel": 1,
           "artNetUniverse": 5,
@@ -256,7 +256,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "192.168.0.10",
+          "host": "192.168.0.60",
           "port": 7890,
           "dmxChannel": 1,
           "artNetUniverse": 6,
@@ -296,7 +296,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "192.168.0.10",
+          "host": "192.168.0.40",
           "port": 7890,
           "dmxChannel": 1,
           "artNetUniverse": 7,
@@ -336,7 +336,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "192.168.0.10",
+          "host": "192.168.0.40",
           "port": 7890,
           "dmxChannel": 1,
           "artNetUniverse": 8,
@@ -376,7 +376,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "192.168.0.10",
+          "host": "192.168.0.60",
           "port": 7890,
           "dmxChannel": 1,
           "artNetUniverse": 9,
@@ -416,7 +416,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "192.168.0.10",
+          "host": "192.168.0.60",
           "port": 7890,
           "dmxChannel": 1,
           "artNetUniverse": 10,
@@ -456,7 +456,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "192.168.0.10",
+          "host": "192.168.0.40",
           "port": 7890,
           "dmxChannel": 1,
           "artNetUniverse": 11,
@@ -491,12 +491,12 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip",
+          "tags": "bar",
           "protocol": 2,
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "192.168.0.10",
+          "host": "192.168.0.40",
           "port": 7890,
           "dmxChannel": 1,
           "artNetUniverse": 12,
@@ -536,7 +536,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "192.168.0.10",
+          "host": "192.168.0.40",
           "port": 7890,
           "dmxChannel": 1,
           "artNetUniverse": 13,
@@ -576,7 +576,7 @@
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "192.168.0.10",
+          "host": "192.168.0.40",
           "port": 7890,
           "dmxChannel": 1,
           "artNetUniverse": 14,
@@ -611,12 +611,12 @@
           "identify": false,
           "mute": false,
           "solo": false,
-          "tags": "strip",
+          "tags": "mural",
           "protocol": 2,
           "byteOrder": 0,
           "transport": 0,
           "reverse": false,
-          "host": "192.168.0.10",
+          "host": "192.168.0.60",
           "port": 7890,
           "dmxChannel": 1,
           "artNetUniverse": 15,
@@ -783,7 +783,7 @@
             "parameters": {
               "label": "Master",
               "arm": false,
-              "selected": true
+              "selected": false
             },
             "children": {},
             "effects": [],
@@ -809,8 +809,8 @@
               "blendMode": 0,
               "midiMonitor": false,
               "midiChannel": 16,
-              "viewEnabled": false,
-              "viewSelector": "",
+              "viewEnabled": true,
+              "viewSelector": "mural",
               "viewNormalization": 0,
               "autoCycleEnabled": true,
               "autoCycleMode": 0,
@@ -824,7 +824,7 @@
             "children": {},
             "effects": [],
             "clips": [],
-            "patternIndex": 1,
+            "patternIndex": 3,
             "patterns": [
               {
                 "id": 266,
@@ -881,7 +881,7 @@
                           "exp": 0.0
                         },
                         "children": {},
-                        "basis": 0.7582294662557645
+                        "basis": 0.09007903224113288
                       }
                     ],
                     "modulations": [
@@ -1161,6 +1161,85 @@
                 "children": {
                   "modulation": {
                     "id": 725,
+                    "class": "heronarts.lx.modulation.LXModulationEngine",
+                    "internal": {
+                      "modulationColor": 0
+                    },
+                    "parameters": {
+                      "label": "Modulation"
+                    },
+                    "children": {},
+                    "modulators": [],
+                    "modulations": [],
+                    "triggers": []
+                  }
+                },
+                "deviceVersion": -1
+              }
+            ]
+          },
+          {
+            "id": 11386,
+            "class": "heronarts.lx.mixer.LXChannel",
+            "internal": {
+              "modulationColor": 0,
+              "controlsExpanded": true
+            },
+            "parameters": {
+              "label": "Channel-2",
+              "arm": false,
+              "selected": true,
+              "enabled": true,
+              "cue": false,
+              "fader": 1.0,
+              "crossfadeGroup": 0,
+              "blendMode": 0,
+              "midiMonitor": false,
+              "midiChannel": 16,
+              "viewEnabled": true,
+              "viewSelector": "bar",
+              "viewNormalization": 0,
+              "autoCycleEnabled": false,
+              "autoCycleMode": 0,
+              "autoCycleTimeSecs": 60.0,
+              "transitionEnabled": false,
+              "transitionTimeSecs": 5.0,
+              "transitionBlendMode": 0,
+              "focusedPattern": 0,
+              "triggerPatternCycle": false
+            },
+            "children": {},
+            "effects": [],
+            "clips": [],
+            "patternIndex": 0,
+            "patterns": [
+              {
+                "id": 11398,
+                "class": "heronarts.lx.pattern.texture.SparklePattern",
+                "internal": {
+                  "modulationColor": 0,
+                  "expanded": true,
+                  "modulationExpanded": false,
+                  "autoCycleEligible": true
+                },
+                "parameters": {
+                  "label": "Sparkle",
+                  "recall": false,
+                  "density": 50.0,
+                  "speed": 0.8571428637951612,
+                  "variation": 25.0,
+                  "duration": 100.0,
+                  "sharp": 0.0,
+                  "waveshape": 0,
+                  "minInterval": 1.0,
+                  "maxInterval": 1.0,
+                  "baseLevel": 0.0,
+                  "minLevel": 75.0,
+                  "maxLevel": 100.0
+                },
+                "children": {
+                  "modulation": {
+                    "id": 11399,
                     "class": "heronarts.lx.modulation.LXModulationEngine",
                     "internal": {
                       "modulationColor": 0
