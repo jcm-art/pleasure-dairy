@@ -1,6 +1,6 @@
 {
   "version": "0.4.1",
-  "timestamp": 1692583997671,
+  "timestamp": 1692583980619,
   "model": {
     "id": 2,
     "class": "heronarts.lx.structure.LXStructure",
@@ -900,7 +900,7 @@
             "children": {},
             "effects": [],
             "clips": [],
-            "patternIndex": 1,
+            "patternIndex": 0,
             "patterns": [
               {
                 "id": 11211,
@@ -1081,7 +1081,7 @@
             "children": {},
             "effects": [],
             "clips": [],
-            "patternIndex": 0,
+            "patternIndex": 2,
             "patterns": [
               {
                 "id": 12178,
@@ -2431,7 +2431,7 @@
             "children": {},
             "effects": [],
             "clips": [],
-            "patternIndex": 3,
+            "patternIndex": 1,
             "patterns": [
               {
                 "id": 12219,
@@ -2612,7 +2612,7 @@
             "children": {},
             "effects": [],
             "clips": [],
-            "patternIndex": 3,
+            "patternIndex": 1,
             "patterns": [
               {
                 "id": 12239,
@@ -2793,7 +2793,7 @@
             "children": {},
             "effects": [],
             "clips": [],
-            "patternIndex": 2,
+            "patternIndex": 0,
             "patterns": [
               {
                 "id": 12259,
