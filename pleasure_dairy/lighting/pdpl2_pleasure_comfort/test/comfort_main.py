@@ -88,7 +88,8 @@ def button_callback(channel):
     print("Button pressed")
     next_scene()
 
-def next_scene()
+def next_scene():
+    print("next scene here")
     #TODO: set stop signal to join threads & stop devices.
     #stop.set()
 
