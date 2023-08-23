@@ -98,8 +98,8 @@ class PleasureComfort:
             print(lxp, main_wav, sub_wav)
             self.scenes.append({
                 'lxp': lxp[0], 
-                'main': soundfile.read(main_wav[0], dtype=DTYPE),
-                'sub': soundfile.read(sub_wav[0], dtype=DTYPE),
+                'main': main_wav[0],
+                'sub': sub_wav[0],
             })
 
     def run(self):
@@ -111,13 +111,16 @@ class PleasureComfort:
         self.alarm.start()
 
         scene = self.scenes[self.idx]
+        main_audio = soundfile.read(scene['main'], dtype=DTYPE)
+        sub_audio = soundfile.read(scene['sub'], dtype=DTYPE)
+
         self.threads = [
             threading.Thread(
                 target=play_audio, 
-                args=[scene['main'], self.main_out, 'main', self.stop_signal]),
+                args=[main_audio, self.main_out, 'main', self.stop_signal]),
             threading.Thread(
                 target=play_audio, 
-                args=[scene['sub'], self.sub_out, 'sub', self.stop_signal]),
+                args=[sub_audio, self.sub_out, 'sub', self.stop_signal]),
             threading.Thread(
                 target=launch_lxp, 
                 args=[scene['lxp'], self.stop_signal])
