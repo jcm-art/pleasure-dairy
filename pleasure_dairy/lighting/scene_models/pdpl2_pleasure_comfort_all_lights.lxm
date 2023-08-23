@@ -617,7 +617,7 @@
         "scale": 1.0,
         "selected": true,
         "deactivate": false,
-        "enabled": true,
+        "enabled": false,
         "brightness": 1.0,
         "identify": false,
         "mute": false,
