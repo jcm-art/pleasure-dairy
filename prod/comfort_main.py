@@ -58,9 +58,9 @@ class PleasureComfort:
         
         self.stop_signal = threading.Event()
 
-        self.idx = 0
-        self._load_scenes()
         self._init_gpio()
+        self._load_scenes()
+        self.idx = 0
 
         self.alarm = threading.Timer(TIMEOUT, self.next)
 
@@ -84,6 +84,7 @@ class PleasureComfort:
         - two .wav files with naming pattern *.main.wav and *.sub.wav
         The wav files are opened immediately and loaded into numpy arrays.
         """
+        print('Loading scenes.')
         self.scenes = []
         for path in os.listdir('scenes'):
             if not os.path.isdir(path): continue
@@ -101,6 +102,7 @@ class PleasureComfort:
                 'main': main_wav[0],
                 'sub': sub_wav[0],
             })
+        print('Loaded %d scenes.' % len(self.scenes))
 
     def run(self):
         while True:
@@ -114,6 +116,9 @@ class PleasureComfort:
         main_audio = soundfile.read(scene['main'], dtype=DTYPE)
         sub_audio = soundfile.read(scene['sub'], dtype=DTYPE)
 
+        print('[play_scene] Launching scene with {lxp}, {main}, {sub}'
+              .format(scene))
+
         self.threads = [
             threading.Thread(
                 target=play_audio, 
@@ -126,6 +131,7 @@ class PleasureComfort:
                 args=[scene['lxp'], self.stop_signal])
         ]
 
+        print('[play_scene] Waiting for stop signal.')
         self.stop_signal.wait()
 
     def next(self):
@@ -136,9 +142,14 @@ class PleasureComfort:
 
         # Tell all threads it's time to stop, then wait for them to clean up and
         # exit gracefully, before clearing the stop signal.
+        print('[next] Ending scene; sending stop signal.')
         self.stop_signal.set()
+
+        print('[next] Waiting for threads to terminate')
         for t in self.threads:
             t.join()
+
+        print('[next] Clearing stop signal')
         self.stop_signal.clear()
 
         self.idx = (self.idx + 1) % len(self.scenes)
