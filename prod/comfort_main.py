@@ -5,10 +5,9 @@ import subprocess
 import sounddevice
 import soundfile
 import threading
-import signal
 import time
 
-import rpi.GPIO as GPIO
+import RPi.GPIO as GPIO
 
 # Pi 3/4 have two built-in audio interfaces: 3.5mm and HDMI.  Extra USB audio
 # interfaces are expected to show up in indices 2 & 3, though that may not be
@@ -23,18 +22,7 @@ BUTTON_PIN = 17
 DTYPE = "float32"
 
 # How many seconds to wait before advancing to the next scene.
-TIMEOUT = 3
-
-def play_audio(buf, dev, name, signal):
-    print('Playing audio on %s' % name)
-    dev.start()
-    dev.write(buf)
-
-    signal.wait()
-    print('[%s]: Received stop signal!' % name)
-
-    dev.stop()
-    print('[%s]: Closed device, exiting.' % name)
+TIMEOUT = 10
 
 def launch_lxp(lxp, signal):
     print('Launching %s with LX headless' % lxp)
@@ -42,21 +30,18 @@ def launch_lxp(lxp, signal):
         'java', '-cp', 'lx-0.4.1-with-deps.jar:.', 'HeadlessMain', lxp])
 
     signal.wait()
+    
     print('[%s]: Received stop signal!' % lxp)
-
-    # Send the signal to all the process groups
-    os.killpg(os.getpgid(lx.pid), signal.SIGTERM)
+    lx.terminate()
+    
     print('[%s]: Killed LX process, exiting.' % lxp)
 
 
 class PleasureComfort:
     def __init__(self):
-        self.main = sounddevice.OutputStream(
-            device=MAIN_INDEX, dtype=DTYPE, channels=2)
-        self.sub = sounddevice.OutputStream(
-            device=SUB_INDEX, dtype=DTYPE, channels=2)
         
         self.stop_signal = threading.Event()
+        self.next_signal = threading.Event()
 
         self._init_gpio()
         self._load_scenes()
@@ -84,59 +69,83 @@ class PleasureComfort:
         - two .wav files with naming pattern *.main.wav and *.sub.wav
         The wav files are opened immediately and loaded into numpy arrays.
         """
-        print('Loading scenes.')
+        print('Loading scenes from %s' % os.getcwd())
+        print(os.listdir('scenes'))
         self.scenes = []
         for path in os.listdir('scenes'):
-            if not os.path.isdir(path): continue
+            prefix = os.path.join(os.getcwd(), 'scenes', path)
+            if not os.path.isdir(prefix): continue
             
-            lxp = glob.glob(os.path.join(path, '*.lxp'))
-            main_wav = glob.glob(os.path.join(path, '*main.wav'))
-            sub_wav = glob.glob(os.path.join(path, '*sub.wav'))
+            lxp = glob.glob(os.path.join(prefix, '*.lxp'))
+            main_wav = glob.glob(os.path.join(prefix, '*main.wav'))
+            sub_wav = glob.glob(os.path.join(prefix, '*sub.wav'))
 
             if len(lxp) != 1 or len(main_wav) != 1 or len(sub_wav) != 1:
                 continue
 
-            print(lxp, main_wav, sub_wav)
             self.scenes.append({
-                'lxp': lxp[0], 
-                'main': main_wav[0],
-                'sub': sub_wav[0],
+                'lxp': os.path.join(prefix, lxp[0]), 
+                'main': os.path.join(prefix, main_wav[0]),
+                'sub': os.path.join(prefix, sub_wav[0]),
             })
         print('Loaded %d scenes.' % len(self.scenes))
 
     def run(self):
         while True:
-            print('Starting scene %d' % self.idx)
-            self.play_scene()
+            try:
+                print('Starting scene %d' % self.idx)
+                self.play_scene()
+            except Exception as e:
+                self.alarm.cancel()
+                raise e
 
     def play_scene(self):
         self.alarm.start()
+        self.next_signal.clear()
 
         scene = self.scenes[self.idx]
-        main_audio = soundfile.read(scene['main'], dtype=DTYPE)
-        sub_audio = soundfile.read(scene['sub'], dtype=DTYPE)
 
         print('[play_scene] Launching scene with {lxp}, {main}, {sub}'
-              .format(scene))
+              .format(**scene))
 
         self.threads = [
             threading.Thread(
-                target=play_audio, 
-                args=[main_audio, self.main_out, 'main', self.stop_signal]),
+                target=self.play_audio, 
+                args=[scene['main'], MAIN_INDEX]),
             threading.Thread(
-                target=play_audio, 
-                args=[sub_audio, self.sub_out, 'sub', self.stop_signal]),
+                target=self.play_audio, 
+                args=[scene['sub'], SUB_INDEX]),
             threading.Thread(
                 target=launch_lxp, 
                 args=[scene['lxp'], self.stop_signal])
         ]
 
-        print('[play_scene] Waiting for stop signal.')
-        self.stop_signal.wait()
+        for t in self.threads:
+            t.start()
+
+        print('[play_scene] Waiting for stop/next signal.')
+        self.next_signal.wait()
+
+    def play_audio(self, wav, device_index):
+        with soundfile.SoundFile(wav) as f:
+            def callback(outdata, n_frames, time, status):
+                view = f.read(n_frames, dtype=DTYPE, out=outdata)
+                if view.size != outdata.size:
+                    print('[%s] End of file.' % wav)
+                    raise sounddevice.CallbackStop()
+                if self.stop_signal.is_set():
+                    print('[%s] Received stop signal!' % wav)
+                    raise sounddevice.CallbackStop()
+                
+            with sounddevice.OutputStream(
+                samplerate=f.samplerate, channels=f.channels, dtype=DTYPE,
+                device=device_index, callback=callback) as stream:
+                while stream.active:
+                    time.sleep(0.1)
 
     def next(self):
         # Ensure that any pending alarm is cancelled, and re-initialize so it
-        # can be started again by the next scene.
+        # can be started again by the nekxt scene.
         self.alarm.cancel()
         self.alarm = threading.Timer(TIMEOUT, self.next)
 
@@ -153,6 +162,7 @@ class PleasureComfort:
         self.stop_signal.clear()
 
         self.idx = (self.idx + 1) % len(self.scenes)
+        self.next_signal.set()
 
 
 if __name__ == "__main__":
