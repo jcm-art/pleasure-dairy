@@ -29,7 +29,13 @@ This compiled sketch can then be deploted to the Arduino. This is done by select
 
 ## Introduction
 
-## Onboard LED Control
+In this section, we will discuss the basics of LED control with Arduino. This will include a discussion of the different types of LEDs, how to control them, and how to use mosfets to control higher power devices.
+
+There are two main types of LED control discussed here; with "Direct Control", the Arduino's output value directly sets the strength of either a single LED or a single color channel of a strip. In this case, setting a pin connected to "R" to a PWM value of 127 (50% of the int8 max of 255) would set the LED or entire LED strip to have an R channel value of 50% output.
+
+The second type of control is for individually addressable LEDs. These LEDs have an integrated circuit either embedded on the LED or adjacent on the strip. This allows each LED in a strip to be controlled separately by sending digital messages from the Arduino to the LED strip. This is discussed in more detail in the "Individually Addressable LED Control" section.
+
+## Direct Onboard LED Control
 
 The simplist way to verify LED functionality with the Arduio service is to control the onboard LED, if available on the Arduino model in usage. The pin number for this is LED_BUILTIN and it can be turned on and off by writing HIGH and LOW values to the digital output.
 
@@ -46,8 +52,14 @@ External LEDs can be controlled with a similar method; however, to prevent burni
 Note that for standalone LEDs, the longer side of the LED pins should go to the high voltage side of the circuit.
 
 
-## LED Control with Mosfet
+## Direct LED Control with Mosfet
 
 Mosfets can be used as gates to turn on and off devices requiring higher current / power than can be provided by the Arduino. These work by having a gate pin, a source pin, and a drain pin. The source pin should be connected to the ground of the voltage source (either on the Arduino for low power devices equivalent to the setup in the "Direct LED Control" section) while the "drain" pin should be connected to the load and ultimately to high voltage.
 
 The mosfets used in the direct control demonstration example are [here](https://www.amazon.com/gp/product/B07LG5BCDY/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1).
+
+## Individually Addressable LED Control
+
+To control individually addressable LEDs, the FastLED library is used to send commands. This library can be installed in VS Code by opening the command pallette and selecting "Arduino: Library Manager". This will open a new window where the FastLED library can be searched for and installed.
+
+For more details on individually addressable LED control, see this [reference](https://howtomechatronics.com/tutorials/arduino/how-to-control-ws2812b-individually-addressable-leds-using-arduino/).
