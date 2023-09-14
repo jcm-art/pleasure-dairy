@@ -32,9 +32,9 @@ void initialize_output_pins() {
 // Enable a custom delay factor for blink
 void timed_blink(int pin, int on_time_multiplier, int delay_multiplier) {
   
-  digitalWrite(pin, HIGH);  // turn the LED on (HIGH is the voltage level)
+  analogWrite(pin, 255);  // turn the LED on (HIGH is the voltage level)
   delay(1 * on_time_multiplier);                      // wait for a second
-  digitalWrite(pin, LOW);   // turn the LED off by making the voltage LOW
+  analogWrite(pin, 0);   // turn the LED off by making the voltage LOW
   delay(1 * delay_multiplier);                      // wait for a second
 }
 
@@ -57,24 +57,28 @@ void blink_speed_sweep(int start, int end) {
 
 // Sweep PWM for LEDs
 void sweep_pwm_values(int start, int end, int delay_time) {
-  // Sweep through all int8 pwm values
+  // Forward sweep through all int8 pwm values
   for (byte i = start; i < end; i = i + 1) {
     // Turn pins on with PWM value
     for (byte j = 0; j < num_pins; j = j + 1) {
       analogWrite(output_pins[j], i);
     }
     delay(delay_time);
+  }
 
-    // Turn pins off
+  // Backwards sweep through all int8 pwm values
+  for (byte i = start; i < end; i = i + 1) {
+    // Turn pins on with PWM value
     for (byte j = 0; j < num_pins; j = j + 1) {
-      analogWrite(output_pins[j], 0);
+      analogWrite(output_pins[j], 255-1-i);
     }
     delay(delay_time);
   }
+  delay(1000);
 }
 
 // the loop function runs over and over again forever
 void loop() {
   blink_speed_sweep(100, 105);
-  sweep_pwm_values(0, 255, 100);
+  sweep_pwm_values(0, 255, 10);
 }
