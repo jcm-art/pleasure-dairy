@@ -1,45 +1,80 @@
 /*
-  Blink
 
-  Turns an LED on for one second, then off for one second, repeatedly.
 
-  Most Arduinos have an on-board LED you can control. On the UNO, MEGA and ZERO
-  it is attached to digital pin 13, on MKR1000 on pin 6. LED_BUILTIN is set to
-  the correct LED pin independent of which board is used.
-  If you want to know what pin the on-board LED is connected to on your Arduino
-  model, check the Technical Specs of your board at:
-  https://www.arduino.cc/en/Main/Products
-
-  modified 8 May 2014
-  by Scott Fitzgerald
-  modified 2 Sep 2016
-  by Arturo Guadalupi
-  modified 8 Sep 2016
-  by Colby Newman
-
-  This example code is in the public domain.
-
-  https://www.arduino.cc/en/Tutorial/BuiltInExamples/Blink
 */
+
+// Missing definitions from library
+#define PIN9 9
+
+// Initialize LED pin list
+int output_pins[] = {LED_BUILTIN, PIN3, PIN5, PIN6, PIN9};
+int num_pins = sizeof(output_pins) / sizeof(output_pins[0]);
 
 // the setup function runs once when you press reset or power the board
 void setup() {
-  // initialize digital pin LED_BUILTIN as an output.
-  pinMode(LED_BUILTIN, OUTPUT);
+
+  // Set pin initial conditions
+  initialize_output_pins();
+
+}
+
+// Initialize output pins to off
+void initialize_output_pins() {
+  for (byte i = 0; i < num_pins; i = i + 1) {
+    // initialize output pins as an output.
+    pinMode(output_pins[i], OUTPUT);
+
+    // write pin to low to ensure it is off
+    analogWrite(output_pins[i], 0);
+  }
 }
 
 // Enable a custom delay factor for blink
-void timed_blink(int on_time_multiplier, int delay_multiplier) {
-  digitalWrite(LED_BUILTIN, HIGH);  // turn the LED on (HIGH is the voltage level)
-  delay(100 * on_time_multiplier);                      // wait for a second
-  digitalWrite(LED_BUILTIN, LOW);   // turn the LED off by making the voltage LOW
-  delay(100 * delay_multiplier);                      // wait for a second
+void timed_blink(int pin, int on_time_multiplier, int delay_multiplier) {
+  
+  digitalWrite(pin, HIGH);  // turn the LED on (HIGH is the voltage level)
+  delay(1 * on_time_multiplier);                      // wait for a second
+  digitalWrite(pin, LOW);   // turn the LED off by making the voltage LOW
+  delay(1 * delay_multiplier);                      // wait for a second
+}
+
+// Blink all pins in sequence
+void blink_all_pins_sequential(int speed) {
+  // Iterate over initialized pin list and blink each one
+  for (byte i = 0; i < num_pins; i = i + 1) {
+    timed_blink(output_pins[i], speed, speed);
+  }
+
+}
+
+// Execute blink pattern
+void blink_speed_sweep(int start, int end) {
+  for (byte i = start; i < end; i = i + 1) {
+    blink_all_pins_sequential(i);
+  }
+  delay(1000);
+}
+
+// Sweep PWM for LEDs
+void sweep_pwm_values(int start, int end, int delay_time) {
+  // Sweep through all int8 pwm values
+  for (byte i = start; i < end; i = i + 1) {
+    // Turn pins on with PWM value
+    for (byte j = 0; j < num_pins; j = j + 1) {
+      analogWrite(output_pins[j], i);
+    }
+    delay(delay_time);
+
+    // Turn pins off
+    for (byte j = 0; j < num_pins; j = j + 1) {
+      analogWrite(output_pins[j], 0);
+    }
+    delay(delay_time);
+  }
 }
 
 // the loop function runs over and over again forever
 void loop() {
-  timed_blink(3, 3);
-  timed_blink(10, 10);
-  timed_blink(3, 3);
-  timed_blink(10, 10);
+  blink_speed_sweep(100, 105);
+  sweep_pwm_values(0, 255, 100);
 }
