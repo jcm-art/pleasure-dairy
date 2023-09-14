@@ -49,3 +49,5 @@ Note that for standalone LEDs, the longer side of the LED pins should go to the 
 ## LED Control with Mosfet
 
 Mosfets can be used as gates to turn on and off devices requiring higher current / power than can be provided by the Arduino. These work by having a gate pin, a source pin, and a drain pin. The source pin should be connected to the ground of the voltage source (either on the Arduino for low power devices equivalent to the setup in the "Direct LED Control" section) while the "drain" pin should be connected to the load and ultimately to high voltage.
+
+The mosfets used in the direct control demonstration example are [here](https://www.amazon.com/gp/product/B07LG5BCDY/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1).
