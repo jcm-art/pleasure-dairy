@@ -38,7 +38,8 @@ void timed_blink(int on_time_multiplier, int delay_multiplier) {
 
 // the loop function runs over and over again forever
 void loop() {
-  timed_blink(1, 1);
-  timed_blink(1, 1);
-  timed_blink(5, 5);
+  timed_blink(3, 3);
+  timed_blink(10, 10);
+  timed_blink(3, 3);
+  timed_blink(10, 10);
 }
