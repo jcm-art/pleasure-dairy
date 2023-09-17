@@ -4,9 +4,13 @@
 #include "Arduino.h" 
 #include "PatternStructFrame.h"
 
+// TODO - update to accept preallocated memory space to fill, free memory in scene file on exit
+// https://stackoverflow.com/questions/23143624/c-return-array-of-structs
+
 class LEDFixtureArtist {
 public:
 	LEDFixtureArtist();
+
 	// Static, uniform fixture color functions
 	void generate_static_color(int num_leds, int r, int g, int b);
 	void generate_static_color(int num_leds, int *color);
