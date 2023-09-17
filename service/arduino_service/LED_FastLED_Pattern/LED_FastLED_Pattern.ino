@@ -26,6 +26,7 @@ CRGB leds[NUM_FIXTURES][NUM_LEDS_PER_FIXTURE];
 constexpr int addressable_pins[] = {ADDRESSABLE_PIN_1, ADDRESSABLE_PIN_2, ADDRESSABLE_PIN_3, ADDRESSABLE_PIN_4, ADDRESSABLE_PIN_5, ADDRESSABLE_PIN_6};
 float output_current = 0.0;
 int serial_counter = 0;
+#define SERIAL_INTERVAL 300
 
 void setup() {
   Serial.begin(9600); // open the serial port at 9600 bps:
@@ -50,7 +51,7 @@ void set_led(int strip_id, int led_id, int r, int g, int b){
   int prior_val = leds[strip_id][led_id].r + leds[strip_id][led_id].g + leds[strip_id][led_id].b;
   output_current += (float((r + g + b) - prior_val))/(3*255) * CURRENT_PER_LED;
 
-  if (serial_counter % 100 == 0){
+  if (serial_counter % SERIAL_INTERVAL == 0){
     Serial.println("Current is " + String(output_current) + " vs. max of " + String(MAX_Current));
     serial_counter = 0;
   }
