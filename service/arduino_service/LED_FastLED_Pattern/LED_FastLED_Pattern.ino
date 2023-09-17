@@ -12,134 +12,84 @@
 #define ADDRESSABLE_PIN_4 8
 #define ADDRESSABLE_PIN_5 12
 #define ADDRESSABLE_PIN_6 13
-#define NUM_LEDS 15
-CRGB leds[NUM_LEDS];
-#define MAX_BRIGHTNESS 50 // Max brightness required due to current limiations of prototype board
-// TODO - replace max brightness with current check function / normalization function
-// Add missing definitions from library
-#define PIN9 9
+#define NUM_FIXTURES 6
+#define NUM_LEDS_PER_FIXTURE 15
+CRGB leds[NUM_FIXTURES][NUM_LEDS_PER_FIXTURE];
+
+
+// Define limits for LED output based on device capabilities
+#define MAX_Current 900
+#define CURRENT_PER_LED 60
+#define MAX_BRIGHTNESS 255 // Max brightness required due to current limiations of prototype board
 
 // Initialize LED pin list
-int output_pins[] = {LED_BUILTIN, PIN3, PIN5, PIN6, PIN9};
-int num_pins = sizeof(output_pins) / sizeof(output_pins[0]);
+constexpr int addressable_pins[] = {ADDRESSABLE_PIN_1, ADDRESSABLE_PIN_2, ADDRESSABLE_PIN_3, ADDRESSABLE_PIN_4, ADDRESSABLE_PIN_5, ADDRESSABLE_PIN_6};
+int output_current = 0;
 
-// the setup function runs once when you press reset or power the board
 void setup() {
-
-  // Set pin initial conditions
-  initialize_output_pins();
+  // Set pin initial conditions once when you press reset or power the board
   initialize_addressable_LED_pins();
-
-}
-
-// Initialize output pins to off
-void initialize_output_pins() {
-  for (byte i = 0; i < num_pins; i = i + 1) {
-    // initialize output pins as an output.
-    pinMode(output_pins[i], OUTPUT);
-
-    // write pin to low to ensure it is off
-    analogWrite(output_pins[i], 0);
-  }
 }
 
 void initialize_addressable_LED_pins() {
-  // Initialize addressable LED pins
-  FastLED.addLeds<WS2812B, ADDRESSABLE_PIN_1, GRB>(leds, NUM_LEDS);
-  FastLED.addLeds<WS2812B, ADDRESSABLE_PIN_2, GRB>(leds, NUM_LEDS);
-  FastLED.addLeds<WS2812B, ADDRESSABLE_PIN_3, GRB>(leds, NUM_LEDS);
-  FastLED.addLeds<WS2812B, ADDRESSABLE_PIN_4, GRB>(leds, NUM_LEDS);
-  FastLED.addLeds<WS2812B, ADDRESSABLE_PIN_5, GRB>(leds, NUM_LEDS);
-  FastLED.addLeds<WS2812B, ADDRESSABLE_PIN_6, GRB>(leds, NUM_LEDS);
+  // Initialize addressable LED pins (unable to use a for loop)
+  FastLED.addLeds<WS2812B, ADDRESSABLE_PIN_1, GRB>(leds[0], NUM_LEDS_PER_FIXTURE).setCorrection(TypicalLEDStrip);
+  FastLED.addLeds<WS2812B, ADDRESSABLE_PIN_2, GRB>(leds[1], NUM_LEDS_PER_FIXTURE).setCorrection(TypicalLEDStrip);
+  FastLED.addLeds<WS2812B, ADDRESSABLE_PIN_3, GRB>(leds[2], NUM_LEDS_PER_FIXTURE).setCorrection(TypicalLEDStrip);
+  FastLED.addLeds<WS2812B, ADDRESSABLE_PIN_4, GRB>(leds[3], NUM_LEDS_PER_FIXTURE).setCorrection(TypicalLEDStrip);
+  FastLED.addLeds<WS2812B, ADDRESSABLE_PIN_5, GRB>(leds[4], NUM_LEDS_PER_FIXTURE).setCorrection(TypicalLEDStrip);
+  FastLED.addLeds<WS2812B, ADDRESSABLE_PIN_6, GRB>(leds[5], NUM_LEDS_PER_FIXTURE).setCorrection(TypicalLEDStrip);
+  FastLED.clear();
 }
 
-// Enable a custom delay factor for blink
-void timed_blink(int pin, int on_time_multiplier, int delay_multiplier) {
-  
-  analogWrite(pin, MAX_BRIGHTNESS);  // turn the LED on (HIGH is the voltage level)
-  delay(1 * on_time_multiplier);                      // wait for a second
-  analogWrite(pin, 0);   // turn the LED off by making the voltage LOW
-  delay(1 * delay_multiplier);                      // wait for a second
-}
+// Set Addressable LED value w/ current tracking
+void set_led(int strip_id, int led_id, int r, int g, int b){
+  // Get prior value and update current
+  int prior_val = leds[strip_id][led_id].r + leds[strip_id][led_id].g + leds[strip_id][led_id].b;
+  output_current += ((r + g + b) - prior_val)/(3*255) * CURRENT_PER_LED;
 
-// Blink all pins in sequence
-void blink_all_pins_sequential(int speed) {
-  // Iterate over initialized pin list and blink each one
-  for (byte i = 0; i < num_pins; i = i + 1) {
-    timed_blink(output_pins[i], speed, speed);
-  }
+  // Set new LED value
+  leds[strip_id][led_id] = CRGB(r, g, b);
 
-}
-
-// Sweep blink pattern with different speeds
-void blink_speed_sweep(int start, int end) {
-  for (byte i = start; i < end; i = i + 1) {
-    blink_all_pins_sequential(i);
-  }
-  delay(1000);
-}
-
-// Sweep PWM values for LEDs
-void sweep_pwm_values(int start, int end, int delay_time) {
-  // Forward sweep through all int8 pwm values
-  for (byte i = start; i < end; i = i + 1) {
-    // Turn pins on with PWM value
-    for (byte j = 0; j < num_pins; j = j + 1) {
-      analogWrite(output_pins[j], i);
+  // Check if current is over limit
+  if (output_current > MAX_Current){
+    float current_ratio = MAX_Current / output_current;
+    for (int i = 0; i< NUM_FIXTURES; i = i + 1) {
+      for (int j = 0; j < NUM_LEDS_PER_FIXTURE; j = j + 1) {
+        CRGB prior_color = leds[i][j];
+        leds[i][j] = CRGB(int(prior_color.r*current_ratio), int(prior_color.g*current_ratio), int(prior_color.b*current_ratio));
+      }
     }
-    delay(delay_time);
   }
-
-  // Backwards sweep through all int8 pwm values
-  for (byte i = start; i < end; i = i + 1) {
-    // Turn pins on with PWM value
-    for (byte j = 0; j < num_pins; j = j + 1) {
-      analogWrite(output_pins[j], MAX_BRIGHTNESS-1-i);
-    }
-    delay(delay_time);
-  }
-  delay(1000);
-}
-
-// Short demo script for LED
-void addressable_demo_pattern(){
-  leds[0] = CRGB(MAX_BRIGHTNESS, 0, 0);
-  FastLED.show();
-  delay(500);  
-  leds[1] = CRGB(0, MAX_BRIGHTNESS, 0);
-  FastLED.show();
-  delay(500);
-  leds[2] = CRGB(0, 0, MAX_BRIGHTNESS);
-  FastLED.show();
-  delay(500);
-  leds[3] = CRGB(150, 0, MAX_BRIGHTNESS);
-  FastLED.show();
-  delay(500);
-  leds[4] = CRGB(MAX_BRIGHTNESS, 200, 20);
-  FastLED.show();
-  delay(500);
 }
 
 // Turn off addressable LEDs
 void addressable_off(){
-  for (byte i = 0; i < NUM_LEDS; i = i + 1) {
-    leds[i] = CRGB(0, 0, 0);
+  for (byte i = 0; i < NUM_FIXTURES ; i = i + 1) {
+    for (byte j = 0; j < NUM_LEDS_PER_FIXTURE; j = j + 1) {
+      leds[i][j] = CRGB(0, 0, 0);
+    }
   }
   FastLED.show();
 }
 
-// Traveling LED pattern
-void traveling_led(int num_iterations, int delay_time) {
-  for (int j = 0; j < num_iterations; j = j + 1) {
-    int counter = 0;
-    while (counter < NUM_LEDS) {
-      // Set all equal to 0
-      for (int i = 0; i < NUM_LEDS; i = i + 1) {
-        leds[i] = CRGB(0, 0, 0);
-      }
+// Vertical traveling LED pattern
+void vertical_traveling_led(int num_iterations, int delay_time) {
+  // Run traveling LED animation n times
+  for (int n = 0; n < num_iterations; n = n + 1) {
 
-      // Set counter value to MAX_BRIGHTNESS
-      leds[counter] = CRGB(MAX_BRIGHTNESS, 0, 0);
+    int counter = 0;
+    while (counter < NUM_LEDS_PER_FIXTURE) {
+      // Set all equal to 0
+      for (int i = 0; i< NUM_FIXTURES; i = i + 1){
+
+        for (int j = 0; j < NUM_LEDS_PER_FIXTURE; j = j + 1) {
+          set_led(i, j, 0, 0, 0);
+        }
+
+        // Set counter value to MAX_BRIGHTNESS
+        set_led(i, counter, MAX_BRIGHTNESS, 0, 0);
+      }
       FastLED.show();
       counter = counter + 1;
       delay(delay_time);
@@ -147,12 +97,81 @@ void traveling_led(int num_iterations, int delay_time) {
   }
 }
 
+// Spiral traveling LED pattern
+void spiral_traveling_led(int num_iterations, int delay_time) {
+  // Run traveling LED animation n times
+  for (int n = 0; n < num_iterations; n = n + 1) {
+
+    int counter = 0;
+    while (counter < NUM_LEDS_PER_FIXTURE) {
+      // Set all equal to 0
+      for (int i = 0; i< NUM_FIXTURES; i = i + 1){
+
+        for (int j = 0; j < NUM_LEDS_PER_FIXTURE; j = j + 1) {
+          set_led(i, j, 0, 0, 0);
+        }
+
+        // Set counter value to MAX_BRIGHTNESS
+        set_led(i, counter, MAX_BRIGHTNESS, 0, 0);
+        FastLED.show();
+        counter = counter + 1;
+        delay(delay_time);
+      }
+
+    }
+  }
+}
+
+// Pulse
+void pulse(int num_iterations, int delay_time, int low_brightness, int high_brightness) {
+  // Run traveling LED animation n times
+  for (int n = 0; n < num_iterations; n = n + 1) {
+
+    int brightness = low_brightness;
+  
+    while (brightness < high_brightness) {
+      // Set all equal to 0
+      for (int i = 0; i< NUM_FIXTURES; i = i + 1){
+        for (int j = 0; j < NUM_LEDS_PER_FIXTURE; j = j + 1) {
+          set_led(i, j, brightness, 0, 0);
+        }
+
+        FastLED.show();
+        brightness = brightness + 1;
+        delay(delay_time);
+      }
+
+    }
+
+    while (brightness >= low_brightness) {
+      // Set all equal to 0
+      for (int i = 0; i< NUM_FIXTURES; i = i + 1){
+        for (int j = 0; j < NUM_LEDS_PER_FIXTURE; j = j + 1) {
+          set_led(i, j, brightness, 0, 0);
+        }
+
+        FastLED.show();
+        brightness = brightness - 1;
+        delay(delay_time);
+      }
+
+    }
+  }
+}
+
 
 // Loop function that runs over and over again forever
 void loop() {
-  addressable_demo_pattern();
+  vertical_traveling_led(2, 100);
   addressable_off();
-  traveling_led(5, 100);
+  delay(500);
+  spiral_traveling_led(2, 100);
+  addressable_off();
+  delay(500);
+  pulse(2, 100, 10, 50);
+  addressable_off();
+  delay(500);
+
   // blink_speed_sweep(200, 205);
   // sweep_pwm_values(0, MAX_BRIGHTNESS, 10);
 
