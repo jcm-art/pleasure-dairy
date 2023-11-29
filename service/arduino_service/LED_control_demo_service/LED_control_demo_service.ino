@@ -9,8 +9,10 @@
 #define PIN9 9
 
 // Define Addressable LED parameters
-#define LED_PIN 7
-#define NUM_LEDS 5
+#define LED_PIN 2
+#define NUM_LEDS 15
+#define MAX_BRIGHTNESS 50 // Max brightness required due to current limiations of prototype board
+// TODO - replace max brightness with current check function
 CRGB leds[NUM_LEDS];
 
 // Initialize LED pin list
@@ -92,19 +94,19 @@ void sweep_pwm_values(int start, int end, int delay_time) {
 
 // Short demo script for LED
 void addressable_demo_pattern(){
-  leds[0] = CRGB(255, 0, 0);
+  leds[0] = CRGB(MAX_BRIGHTNESS, 0, 0);
   FastLED.show();
   delay(500);  
-  leds[1] = CRGB(0, 255, 0);
+  leds[1] = CRGB(0, MAX_BRIGHTNESS, 0);
   FastLED.show();
   delay(500);
-  leds[2] = CRGB(0, 0, 255);
+  leds[2] = CRGB(0, 0, MAX_BRIGHTNESS);
   FastLED.show();
   delay(500);
-  leds[3] = CRGB(150, 0, 255);
+  leds[3] = CRGB(150, 0, MAX_BRIGHTNESS);
   FastLED.show();
   delay(500);
-  leds[4] = CRGB(255, 200, 20);
+  leds[4] = CRGB(MAX_BRIGHTNESS, 200, 20);
   FastLED.show();
   delay(500);
 }
@@ -128,7 +130,7 @@ void traveling_led(int num_iterations, int delay_time) {
       }
 
       // Set counter value to 255
-      leds[counter] = CRGB(255, 0, 0);
+      leds[counter] = CRGB(MAX_BRIGHTNESS, 0, 0);
       FastLED.show();
       counter = counter + 1;
       delay(delay_time);
@@ -143,6 +145,6 @@ void loop() {
   addressable_off();
   traveling_led(5, 100);
   // blink_speed_sweep(200, 205);
-  // sweep_pwm_values(0, 255, 10);
+  // sweep_pwm_values(0, MAX_BRIGHTNESS, 10);
 
 }
