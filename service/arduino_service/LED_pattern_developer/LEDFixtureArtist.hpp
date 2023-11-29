@@ -1,6 +1,8 @@
 #include "LEDFixtureArtist.h"
 #include "PatternStructFrame.h"
 
+// TODO (jcm-art) - Implement LED pattern Library if Arduino selected for project, else deprecate
+
 LEDFixtureArtist::LEDFixtureArtist() {
 }
 

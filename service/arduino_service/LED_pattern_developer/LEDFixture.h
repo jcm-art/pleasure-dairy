@@ -4,6 +4,8 @@
 #include "Arduino.h" 
 #include "PatternStructFrame.h"
 
+// TODO (jcm-art) - Implement LED pattern Library if Arduino selected for project, else deprecate
+
 // TODO - update to accept preallocated memory space to fill, free memory in scene file on exit
 // https://stackoverflow.com/questions/23143624/c-return-array-of-structs
 

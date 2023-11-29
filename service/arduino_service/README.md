@@ -13,7 +13,7 @@ Arduino Based Lighting Service
 
 ### Setting up the Arduino IDE
 
-### Developing with VS Code
+### Developing with VS Code 
 
 #### Setting up VS Code
 
@@ -24,7 +24,7 @@ This [guide](https://www.circuitstate.com/tutorials/how-to-use-vs-code-for-creat
 The Arduino extension can also be used to verify and build Arduino sketches. This is done by selecting the `Arduino: Verify` command from the command palette. This will compile the sketch and report any errors.
 
 This compiled sketch can then be deploted to the Arduino. This is done by selecting the `Arduino: Upload` command from the command palette. This will take the compiled sketch and upload it to the Arduino. The Arduino extension will automatically detect the Arduino board and port, and will use the configuration file generated in the previous step to compile the sketch.
-
+ 
 # LED Control background information
 
 ## Introduction
