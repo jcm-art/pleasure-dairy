@@ -4,6 +4,12 @@ ESP32 Based Lighting Service
 
 # Introduction and Documentation
 
+## ESP32 Background
+
+The ESP32 is a microcontroller with more memory, flash storage, and processing power than the arduino. It also has built in wifi and bluetooth. 
+
+The pinout for the ESP32 is [here](https://randomnerdtutorials.com/esp32-pinout-reference-gpios/).
+
 ## Using the ESP32 Based Lighting Service
 
 
